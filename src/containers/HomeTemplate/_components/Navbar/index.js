@@ -4,7 +4,6 @@ import { Link, NavLink } from 'react-router-dom';
 import { actFetchJobTypes } from './modules/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { actSearchJobs } from 'containers/HomeTemplate/HomePage/modules/actions';
-import { actChangeSubJobs } from 'containers/HomeTemplate/SubJobsPage/modules/actions';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function NavbarHome() {
@@ -21,29 +20,6 @@ export default function NavbarHome() {
     dispatch(actFetchJobTypes());
   }, []);
 
-  const handleRenderJobs = () => {
-    return jobs?.map((job, index) => {
-      if (index < 9) { //API(14) error
-        return (
-          <div key={index} className="dropdown">
-            <Link className="nav-link" to={`/job-types/${job._id}`} data-toggle="dropdown">{job.name}</Link>
-            <div className="dropdown-content" style={{ columnCount: "2", right: `${index >= 4 ? "0" : ""}`, left: `${index >= 4 ? "auto" : "0"}` }}>
-              {handleRenderSubJobs(job)}
-            </div>
-          </div>
-        )
-      }
-    })
-  };
-
-  const handleRenderSubJobs = job => {
-    const subJobs = job.subTypeJobs;
-    return subJobs.map(sub => {
-      return <Link key={sub._id} className="dropdown-item" to={`/sub-jobs/${sub._id}`} onClick={() => {
-        dispatch(actChangeSubJobs(sub._id))
-      }}>{sub.name}</Link>
-    })
-  }
 
   const handleOnChange = (e) => {
     localStorage.setItem("job-keyword", JSON.stringify(e.target.value.trim()));
@@ -191,7 +167,7 @@ export default function NavbarHome() {
       <div className='container'>
         <nav className="navbar navbar-expand-lg m-0 p-0 nav-bottom">
           <div className="navbar-nav mr-auto w-100 justify-content-between">
-            {handleRenderJobs()}
+            
           </div>
         </nav>
       </div>
