@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import './style.css'
 export default function InfoPage() {
   const jobsList = useSelector(state => state.searchingReducer.store);
   // if jobsList?.length>=1 => render => else => notification text

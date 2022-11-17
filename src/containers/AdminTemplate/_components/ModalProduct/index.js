@@ -1,10 +1,10 @@
 import Loading from "components/Loading";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actManageUsers, actResetModal } from "./modules/actions";
+import { actManageProducts, actResetModal } from "./modules/actions";
 
-export default function AdminModal(props) {
-  const { method, userEdit } = props;
+export default function AdminModalProduct(props) {
+  const { method, productEdit } = props;
 
   const message = useSelector((state) => state.modalReducer.message);
   const loading = useSelector((state) => state.modalReducer.loading);
@@ -43,27 +43,27 @@ export default function AdminModal(props) {
   const [state, setState] = useState({ ...initialState });
 
   const handleResetForm = () => {
-    dispatch(actResetModal());
-    if (userEdit) {
+    // dispatch(actResetModal());
+    // if (productEdit) {
       
-      setState({
-        fullname: userEdit.fullname,
-        email: userEdit.email,
-        username: userEdit.username,
-        phone: userEdit.phone,
-        gender: userEdit.gender,
-        address: userEdit.address,
-        role: userEdit.role,
-      });
-    } else {
-      setState({ ...initialState });
-      setValid({...initialValid});
-    }
+    //   setState({
+    //     fullname: userEdit.fullname,
+    //     email: userEdit.email,
+    //     username: userEdit.username,
+    //     phone: userEdit.phone,
+    //     gender: userEdit.gender,
+    //     address: userEdit.address,
+    //     role: userEdit.role,
+    //   });
+    // } else {
+    //   setState({ ...initialState });
+    //   setValid({...initialValid});
+    // }
   };
 
   useEffect(() => {
     handleResetForm();
-  }, [userEdit]);
+  }, [productEdit]);
 
   const handleOnchange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -71,7 +71,7 @@ export default function AdminModal(props) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(actManageUsers(state, method, userEdit?.user_id));
+    dispatch(actManageProducts(state, method, productEdit?.product_id));
   };
 
   const handleLoading = () => {
@@ -92,96 +92,97 @@ export default function AdminModal(props) {
   };
 
   const handleErrors = (event) => {
-    const { name, value } = event.target;
-    let mess = value.trim() === "" ? "Please enter your " + name : "";
-    let {
-      fullnameValid,
-      emailValid,
-      usernameValid,
-      passwordValid,
-      phoneValid,
-      addressValid,
-      formValid,
-    } = valid;
-    switch (name) {
-      case "fullname": {
-        fullnameValid = mess === "" ? true : false;
-        let pattern =
-          "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
-          "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
-          "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$";
-        if (value && !value.match(pattern)) {
-          fullnameValid = false;
-          mess = "Your name seems invalid";
-        } else {
-          fullnameValid = true;
-        }
-        break;
-      }
-      case "email": {
-        emailValid = mess === "" ? true : false;
-        let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (value && !value.match(pattern)) {
-          emailValid = false;
-          mess = "Your email seems invalid";
-        } else {
-          emailValid = true;
-        }
-        break;
-      }
-      case "username": {
-        usernameValid = mess === "" ? true : false;
-        break;
-      }
-      case "password": {
-        passwordValid = mess === "" ? true : false;
-        let pattern = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
-        if (value && !value.match(pattern)) {
-          passwordValid = false;
-          mess = "Your password seems invalid";
-        } else {
-          passwordValid = true;
-        }
-        break;
-      }
-      case "phone": {
-        phoneValid = mess === "" ? true : false;
-        let pattern =
-          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-        if (value && !value.match(pattern)) {
-          phoneValid = false;
-          mess = "Your phone seems invalid";
-        } else {
-          phoneValid = true;
-        }
-        break;
-      }
-      case "address": {
-        addressValid = mess === "" ? true : false;
-        break;
-      }
-      default:
-        break;
-    }
-    formValid =
-      fullnameValid & emailValid & usernameValid & passwordValid & phoneValid & addressValid;
-    setValid({
-      formValid,
-      fullnameValid,
-      emailValid,
-      usernameValid,
-      passwordValid,
-      phoneValid,
-      addressValid,
-      errors: { ...valid.errors, [name]: mess },
-    });
+    // const { name, value } = event.target;
+    // let mess = value.trim() === "" ? "Please enter your " + name : "";
+    // let {
+    //   fullnameValid,
+    //   emailValid,
+    //   usernameValid,
+    //   passwordValid,
+    //   phoneValid,
+    //   addressValid,
+    //   formValid,
+    // } = valid;
+    // switch (name) {
+    //   case "fullname": {
+    //     fullnameValid = mess === "" ? true : false;
+    //     let pattern =
+    //       "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
+    //       "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
+    //       "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$";
+    //     if (value && !value.match(pattern)) {
+    //       fullnameValid = false;
+    //       mess = "Your name seems invalid";
+    //     } else {
+    //       fullnameValid = true;
+    //     }
+    //     break;
+    //   }
+    //   case "email": {
+    //     emailValid = mess === "" ? true : false;
+    //     let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    //     if (value && !value.match(pattern)) {
+    //       emailValid = false;
+    //       mess = "Your email seems invalid";
+    //     } else {
+    //       emailValid = true;
+    //     }
+    //     break;
+    //   }
+    //   case "username": {
+    //     usernameValid = mess === "" ? true : false;
+    //     break;
+    //   }
+    //   case "password": {
+    //     passwordValid = mess === "" ? true : false;
+    //     let pattern = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
+    //     if (value && !value.match(pattern)) {
+    //       passwordValid = false;
+    //       mess = "Your password seems invalid";
+    //     } else {
+    //       passwordValid = true;
+    //     }
+    //     break;
+    //   }
+    //   case "phone": {
+    //     phoneValid = mess === "" ? true : false;
+    //     let pattern =
+    //       /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    //     if (value && !value.match(pattern)) {
+    //       phoneValid = false;
+    //       mess = "Your phone seems invalid";
+    //     } else {
+    //       phoneValid = true;
+    //     }
+    //     break;
+    //   }
+    //   case "address": {
+    //     addressValid = mess === "" ? true : false;
+    //     break;
+    //   }
+    //   default:
+    //     break;
+      
+    // }
+    // formValid =
+    //   fullnameValid & emailValid & usernameValid & passwordValid & phoneValid & addressValid;
+    // setValid({
+    //   formValid,
+    //   fullnameValid,
+    //   emailValid,
+    //   usernameValid,
+    //   passwordValid,
+    //   phoneValid,
+    //   addressValid,
+    //   errors: { ...valid.errors, [name]: mess },
+    // });
   };
   return (
     <div className="modal fade" id="addModal" tabIndex={-1} role="dialog">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{method} USER</h5>
+            <h5 className="modal-title">{method} PRODUCT</h5>
             <button
               type="button"
               className="close"
@@ -247,11 +248,11 @@ export default function AdminModal(props) {
               <div className="form-group">
                 <input
                   className="form-control"
-                  disabled={userEdit ? true : false}
+                  disabled={productEdit ? true : false}
                   type="password"
                   name="password"
                   autoComplete="on"
-                  placeholder={userEdit ? "Password" : "New password"}
+                  placeholder={productEdit ? "Password" : "New password"}
                   onChange={handleOnchange}
                   onBlur={handleErrors}
                 />
@@ -325,7 +326,7 @@ export default function AdminModal(props) {
                 )}
               </div>
               <div className="form-group text-center mt-3">
-                <button className="btn btn-success px-3" type="submit" disabled={userEdit?false:!valid.formValid} >
+                <button className="btn btn-success px-3" type="submit" disabled={productEdit?false:!valid.formValid} >
                   {method}
                 </button>
               </div>

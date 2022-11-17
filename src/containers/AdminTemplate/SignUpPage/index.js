@@ -11,35 +11,32 @@ export default function SignUpPage() {
   const formInput = useRef(null);
 
   const [info, setInfo] = useState({
-    name: "",
+    fullname: "",
     email: "",
+    username: "",
     password: "",
     phone: "",
-    birthday: "",
-    skill: [],
-    certification: [],
     gender: false, //?
-    type: "CLIENT",
+    address: "",
   });
 
   const initialValid = {
     errors: {
-      name: "",
+      fullname: "",
       email: "",
+      username: "",
       password: "",
       phone: "",
-      birthday: "",
-      skill: [],
-      certification: [],
+      gender: false, //?
+      address: "",
     },
     formValid: false,
-    nameValid: false,
+    fullnameValid: false,
     emailValid: false,
+    usernameValid: false,
     passwordValid: false,
     phoneValid: false,
-    birthdayValid: false,
-    skillValid: false,
-    certificationValid: false,
+    address: false,
   };
   const [valid, setValid] = useState({ ...initialValid });
 
@@ -74,25 +71,26 @@ export default function SignUpPage() {
     const { name, value } = event.target;
     let mess = value.trim() === "" ? "Please enter your " + name : "";
     let {
-      nameValid,
+      fullnameValid,
       emailValid,
+      usernameValid,
       passwordValid,
       phoneValid,
-      birthdayValid,
+      addressValid,
       formValid,
     } = valid;
     switch (name) {
-      case "name": {
-        nameValid = mess === "" ? true : false;
+      case "fullname": {
+        fullnameValid = mess === "" ? true : false;
         let pattern =
           "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
           "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
           "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$";
         if (value && !value.match(pattern)) {
-          nameValid = false;
+          fullnameValid = false;
           mess = "Your name seems invalid";
         } else {
-          nameValid = true;
+          fullnameValid = true;
         }
         break;
       }
@@ -107,10 +105,13 @@ export default function SignUpPage() {
         }
         break;
       }
+      case "username": {
+        usernameValid = mess === "" ? true : false;
+        break;
+      }
       case "password": {
         passwordValid = mess === "" ? true : false;
-        let pattern =
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/;
+        let pattern = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
         if (value && !value.match(pattern)) {
           passwordValid = false;
           mess = "Your password seems invalid";
@@ -131,30 +132,23 @@ export default function SignUpPage() {
         }
         break;
       }
-      case "birthday": {
-        birthdayValid = mess === "" ? true : false;
-        let pattern =
-          /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
-        if (value && value.match(pattern)) {
-          birthdayValid = false;
-          mess = "Your birthday seems invalid";
-        } else {
-          birthdayValid = true;
-        }
+      case "address": {
+        addressValid = mess === "" ? true : false;
         break;
       }
       default:
         break;
     }
     formValid =
-      nameValid & emailValid & passwordValid & phoneValid & birthdayValid;
+      fullnameValid & emailValid & usernameValid & passwordValid & phoneValid & addressValid;
     setValid({
       formValid,
-      nameValid,
+      fullnameValid,
       emailValid,
+      usernameValid,
       passwordValid,
       phoneValid,
-      birthdayValid,
+      addressValid,
       errors: { ...valid.errors, [name]: mess },
     });
   };
@@ -172,55 +166,93 @@ export default function SignUpPage() {
             <p className="agileits2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
         <div className="content-agile2">
-          <form action="#" method="post">
+          <form onSubmit={handleSubmit} ref={formInput}>
             <div className="w3layouts"> 
-              <input type="text" id="fullname" name="fullname" placeholder="Full name" title="Please enter your Name" required />
+              <input type="text" id="fullname" name="fullname" placeholder="Full name" title="Please enter your Name" required 
+              onChange={handleOnchange}
+              onBlur={handleErrors}/>
+              {valid.errors.fullname && (
+              <div className="alert alert-danger mt-2">{valid.errors.fullname}</div>
+              )}
             </div>
             <div className="w3layouts">	
-              <input type="email" id="email" name="email" placeholder="mail@example.com" title="Please enter a valid email" required />
+              <input type="email" id="email" name="email" placeholder="mail@example.com" title="Please enter a valid email" required 
+              onChange={handleOnchange}
+              onBlur={handleErrors}/>
+              {valid.errors.email && (
+                <div className="alert alert-danger mt-2">
+                  {valid.errors.email}
+                </div>
+              )}
             </div>
             <div className="w3layouts">	
-              <input type="text" id="username" name="useremail" placeholder="username" title="Please enter a valid username" required />
+              <input type="text" id="username" name="username" placeholder="username" title="Please enter a valid username" required 
+              onChange={handleOnchange}
+              onBlur={handleErrors}/>
+              {valid.errors.username && (
+                <div className="alert alert-danger mt-2">
+                  {valid.errors.username}
+                </div>
+              )}
             </div>
             <div className="agileinfo">	
-              <input type="password" className="lock" name="password" placeholder="Password" id="password1" required />
+              <input type="password" className="lock" name="password" placeholder="Password" id="password1" required 
+              onChange={handleOnchange}
+              onBlur={handleErrors}/>
+              {valid.errors.password && (
+                  <div className="alert alert-danger mt-2">
+                    {valid.errors.password}
+                  </div>
+                )}
             </div>	
             <div className="agileinfo">	
               <input type="password" className="lock" name="confirm-password" placeholder="Confirm Password" id="password2" required />
             </div>
             <div className="w3layouts">	
-              <input type="tel" id="phone" name="phone" placeholder="0123456789" title="Please enter a valid number" required />
+              <input type="tel" id="phone" name="phone" placeholder="0123456789" title="Please enter a valid number" required 
+              onChange={handleOnchange}
+              onBlur={handleErrors}/>
+              {valid.errors.phone && (
+                  <div className="alert alert-danger mt-2">
+                    {valid.errors.phone}
+                  </div>
+              )}
             </div>
-            <div className="w3layouts row mx-5">
-              <div className="col-6">
-                <select name="role" id="role">
-                  <option>Role</option>
-                  <option value="customer">Customer</option>
-                  <option value="artist">Artist</option>
-                </select>
-              </div>
-              <div className="col-6">
-                <select name="gender" id="gender">
+            <div className="w3layouts">
+                <select name="gender" id="gender"
+                onChange={handleOnchange}
+                onBlur={handleErrors}>
                   <option>Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
                 </select>
-              </div>
             </div>
             <div className="w3layouts">	
-              <input type="text" id="address" name="address" placeholder="Address" title="Please enter a valid address" required />
+              <input type="text" id="address" name="address"
+              className="address" placeholder="Address" title="Please enter a valid address" required 
+              onChange={handleOnchange}
+              onBlur={handleErrors}/>
+              {valid.errors.address && (
+                  <div className="alert alert-danger mt-2">
+                    {valid.errors.address}
+                  </div>
+                )}
             </div>			
-            <input type="submit" className="register" defaultValue="Register" />
+            <button className="btn btn-sign-up register" type="submit" disabled={!valid.formValid}>
+            Sign Up
+          </button>
           </form>
-          <p className="wthree w3l">Fast Signup With Your Favourite Social Profile</p>
-          <ul className="social-agileinfo wthree2">
-            <li><a href="#"><i className="fa fa-facebook" /></a></li>
-            <li><a href="#"><i className="fa fa-youtube" /></a></li>
-            <li><a href="#"><i className="fa fa-twitter" /></a></li>
-            <li><a href="#"><i className="fa fa-google-plus" /></a></li>
-          </ul>
-        </div>
+          <div>{handleLoading()}</div>
+            <div className="text-center mt-3">
+              <Link className="p-3" to="/login">
+                Login
+              </Link>
+              <Link className="p-3" to="/">
+                Back to Homepage
+              </Link>
+            </div>
+          </div>
         <div className="clear" />
       </div>
     </div>

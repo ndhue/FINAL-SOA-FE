@@ -5,17 +5,17 @@ export const actManageUsers = (info, method, id) => {
   return dispatch => {
     dispatch(actModalRequest());
     if (method == "ADD") {
-      api.post("/api/auth/signup", info)
+      api.post("/users/", info)
         .then(result => {
-          dispatch(actModalAddSuccess());
+          dispatch(actModalAddSuccess(result.data));
         })
         .catch(error => {
           dispatch(actModalAddFailed(error))
         });
     } else if (method == "EDIT") {
-      api.put(`/api/users/${id}`, info)
+      api.put(`/users/${id}`, info)
         .then(result => {
-          dispatch(actModalEditSuccess());
+          dispatch(actModalEditSuccess(result.data));
         })
         .catch(error => {
           dispatch(actModalEditFailed(error))

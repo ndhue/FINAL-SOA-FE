@@ -1,48 +1,47 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import AdminModal from '../_components/Modal'
+import AdminModalProduct from '../_components/ModalProduct'
 import { removeVietnameseTones } from '../_components/Modal/validation';
-import { actDeleteUser, actFetchUsersData } from './modules/actions';
+import { actDeleteProduct, actFetchProductsData } from './modules/actions';
 import './style.css';
-export default function UsersManagementPage() {
+export default function ProductsManagementPage() {
   const searchInput = useRef(null);
   const dispatch = useDispatch();
   const [method, setMethod] = useState("");
-  const [userEdit, setUserEdit] = useState(null);
+  const [productEdit, setProductEdit] = useState(null);
 
-  const data = useSelector(state => state.usersManagementReducer.data);
-  const [usersData, setUsersData] = useState(null);
+  const data = useSelector(state => state.productsManagementReducerByAdmin.data);
+  const [productsData, setProductsData] = useState(null);
 
   const [searchType, setSearchType] = useState("all");
 
   useEffect(() => {
-    dispatch(actFetchUsersData());
+    dispatch(actFetchProductsData());
   }, []);
 
   useEffect(() => {
-    setUsersData(data);
+    setProductsData(data);
   }, [data]);
 
-  const handleDeleteUser = id => {
+  const handleDeleteProduct = id => {
     if (window.confirm("Delete?")) {
-      dispatch(actDeleteUser(id));
+      dispatch(actDeleteProduct(id));
     }
   }
 
   const handleRenderTable = () => {
-    return usersData?.map((user, index) => {
+    return productsData?.map((product, index) => {
       return (
-        <tr key={user.user_id}>
+        <tr key={product.product_id}>
           <th scope="row">{index + 1}</th>
-          <td>{user.fullname}</td>
-          <td>{user.email}</td>
-          <td>{user.role}</td>
+          <td>{product.product_name}</td>
+          <td>{product.description}</td>
           <td>
             <button className='btn btn-edit mx-1' data-toggle="modal" data-target="#addModal" onClick={() => {
               setMethod("EDIT");
-              setUserEdit(user)
+              setProductEdit(product)
             }}>Edit</button>
-            <button className='btn btn-del mx-1' onClick={() => { handleDeleteUser(user.user_id) }
+            <button className='btn btn-del mx-1' onClick={() => { handleDeleteProduct(product.product_id) }
             }>×</button>
           </td>
         </tr>
@@ -60,7 +59,7 @@ export default function UsersManagementPage() {
             return removeVietnameseTones(user.name.toLowerCase()).indexOf(keyword) >= 0
           }
         });
-        return setUsersData(searchingData);
+        return setProductsData(searchingData);
       }
       case "email": {
         searchingData = data.filter(user => {
@@ -68,7 +67,7 @@ export default function UsersManagementPage() {
             return removeVietnameseTones(user.email.toLowerCase()).indexOf(keyword) >= 0
           }
         });
-        return setUsersData(searchingData);
+        return setProductsData(searchingData);
       }
       case "role": {
         searchingData = data.filter(user => {
@@ -76,17 +75,17 @@ export default function UsersManagementPage() {
             return removeVietnameseTones(user.role.toLowerCase()).indexOf(keyword) >= 0
           }
         });
-        return setUsersData(searchingData);
+        return setProductsData(searchingData);
       }
       default: {
-        return setUsersData(data);
+        return setProductsData(data);
       }
     }
   }
 
   return (
     <div>
-      <h5 className='text-center my-3 user-title'>USERS MANAGEMENT</h5>
+      <h5 className='text-center my-3 user-title'>PRODUCTS MANAGEMENT</h5>
       <div className='d-flex justify-content-between mx-5'>
         <form className="form-inline my-2 my-lg-0" onSubmit={(e) => {
           e.preventDefault();
@@ -96,28 +95,25 @@ export default function UsersManagementPage() {
             <select className="form-control" onChange={(e) => { setSearchType(e.target.value) }}>
               <option>All</option>
               <option value="name">By Name</option>
-              <option value="email">By Email</option>
               <option value="role">By Role</option>
             </select>
           </div>
-          <input className="form-control m-0 mx-2" type="search" placeholder="Find User" aria-label="Search" ref={searchInput} />
+          <input className="form-control m-0 mx-2" type="search" placeholder="Find Product" aria-label="Search" ref={searchInput} />
           <button className="btn m-0 btn-search" type="submit">Search</button>
         </form>
         <button className="btn btn-add-user" data-toggle="modal" data-target="#addModal" onClick={() => {
           setMethod("ADD");
-          setUserEdit(null)
-        }}> + Add User</button>
+          setProductEdit(null)
+        }}> + Add Product</button>
       </div>
-      <AdminModal method={method} userEdit={userEdit} />
+      <AdminModalProduct method={method} productEdit={productEdit} />
 
       <table className="table table-striped mt-5 text-center">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col">Manage</th>
           </tr>
         </thead>
         <tbody>

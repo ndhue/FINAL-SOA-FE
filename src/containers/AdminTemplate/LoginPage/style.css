@@ -1,18 +1,16 @@
-.body-login a{
-    transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-	font-weight:400;
+.body-login {
+	/* background:url(./assets/img/bg/banner.jpg) no-repeat; */
+	background-attachment:fixed;
+	background-position:center;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	font-family: 'Raleway', sans-serif;
+	font-weight:300;
+  height: 100vh;
 }
-input[type="button"],input[type="submit"]{
-	transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-}
+
 h1,h2,h3,h4,h5,h6{
 	margin:0;		
 	font-weight:400;
@@ -51,7 +49,7 @@ body {
 .main-container {
     padding: 0;
 	background: rgba(30, 29, 29, 0.4);
-
+    height: 100vh;
 }
 /*--header--*/
 .header-w3l {
@@ -68,13 +66,14 @@ body {
 
 /*--main--*/
 .main-content-agile {
+    border-radius: 10px;
     margin: 0 auto;
     background:rgba(12, 12, 12, 0.81);
     width: 34%;
 }
 .w3ls-pro h2 {
     font-size: 1.7em;
-    color: #fcb50e;
+    color: white;
     letter-spacing: 3px;
     padding: 1em 0;
     font-weight: 600;
@@ -85,30 +84,42 @@ body {
 	position:relative;
 	 padding: 2.5em;
 }
-.sub-main-w3ls input[type="email"], .sub-main-w3ls input[type="password"] {
+.sub-main-w3ls input[type="text"], .sub-main-w3ls input[type="password"] {
+    border-radius: 10px;
 	outline: none;
     font-size: 1em;
     border: none;
     background: #eeeeee;
-    width: 82.5%;
+    width: 90%;
     color: #000;
     padding: 1em 3em 1em 1em;
     letter-spacing: 1px;
     font-family: 'Snippet', sans-serif;
 }
 .sub-main-w3ls input[type="password"]{
+    border-radius: 10px;
 	margin-top: 1.5em;
 }
-.sub-main-w3ls input[type="submit"] {
-    /* background: url(../images/arrow.png) no-repeat 40% 50%; */
-    border: 2px solid #fff;
-    outline: none;
-    width: 50px;
+.sub-main-w3ls input.login {
+    border-radius: 5px;
+    width: 150px;
+    margin: 30px auto;
+    display: block;
     height: 50px;
-    border-radius: 50%;
-    font-size: 1.5em;
-    cursor: pointer;
-    margin-top: 2.5em;
+    text-align: center;
+    font-size: 17px;
+    font-weight: normal;
+    color: #fff;
+    background-color:#3970b0;
+    border-color: transparent;
+	font-family: 'Raleway', sans-serif;
+	/*-- w3ls --*/
+	transition:all 0.5s ease-in-out;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	-ms-transition:all 0.5s ease-in-out;
+	cursor:pointer;
 }
 
 span.icon1, span.icon2 {
@@ -144,45 +155,6 @@ span.check-w3 {
 	text-decoration: none;
 	font-family: 'Snippet', sans-serif;
 }
-/*-- social-icons --*/
-.social-icons ul li {
-    display: inline-block;
-}
-.social-icons ul li i {
-    font-size: 0.9em;
-    line-height: 2.8em;
-    text-align: center;
-    margin: 0 5px;
-    width: 38px;
-    height: 38px;
-    border-radius: 10%;
-    color: #fff;
-    background: transparent;
-    border: 3px solid #efe8e8;
-}
-.social-icons i.fa.fa-facebook:hover {
-    background: #3b5998;
-    text-shadow: 0px 0px 15px #3b5998;
-    transition: all 0.5s cubic-bezier(0.27, 0.38, 0.58, 1);
-}
-.social-icons i.fa.fa-twitter:hover{
-	background: #1da1f2;
-    text-shadow: 0px 0px 15px #1da1f2;
-    transition: all 0.5s cubic-bezier(0.27, 0.38, 0.58, 1);
-}
-.social-icons i.fa.fa-google-plus:hover{
-	background: #dd4b39;
-    text-shadow: 0px 0px 15px #dd4b39;
-    transition: all 0.5s cubic-bezier(0.27, 0.38, 0.58, 1);
-	
-}
-.social-icons  i.fa.fa-pinterest:hover{
-	background: #bd081c;
-    text-shadow: 0px 0px 15px #bd081c;
-    transition: all 0.5s cubic-bezier(0.27, 0.38, 0.58, 1);	
-	
-}
-/*--social-icons--*/
 
 /*--footer--*/
 .footer {

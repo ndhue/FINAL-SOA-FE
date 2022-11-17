@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import { actLogin, actLoginReset } from './modules/actions';
 import { Redirect } from 'react-router-dom';
 import './style.css';
-import arrow from './img/arrow.png';
+import background1 from "./img/banner.jpg";
+
 export default function LoginPage(props) {
   const [info, setInfo] = useState({
-    email: "",
+    username: "",
     password: ""
   });
 
@@ -43,41 +44,30 @@ export default function LoginPage(props) {
     return <Redirect to="/"></Redirect>
   }
   return (
-    <div className="body-login container">
+    <div className="body-login container-fluid" style={{ backgroundImage: `url(${background1})` }}>
       <div className="main-container">
-        {/*header*/}
         <div className="header-w3l">
-          <h1>Modern Login Form</h1>
+          <h1>Digital Art</h1>
         </div>
-        {/*//header*/}
-        {/*main*/}
         <div className="main-content-agile">
           <div className="w3ls-pro">
-            <h2>Login Now</h2>
+            <h2>Login</h2>
           </div>
           <div className="sub-main-w3ls">	
-            <form action="#" method="post">
-              <input placeholder="Enter your E-mail" name="enter mail" type="email" required />
-              <span className="icon1"><i className="fa fa-envelope" aria-hidden="true" /></span>
-              <input placeholder="Enter Password" name="Password" type="password" required />
-              <span className="icon2"><i className="fa fa-unlock-alt" aria-hidden="true" /></span>
+            <form onSubmit={handleSubmit}>
+              <input placeholder="Enter your username" name="username" type="text" required onChange={handleOnChange} />
+              <input placeholder="Enter Password" name="Password" type="password" required onChange={handleOnChange}/>
               <div className="checkbox-w3">
-                <span className="check-w3"><input type="checkbox" />Remember Me</span>
-                <a href="#">Forgot Password?</a>
+                <div className='text-center mt-3'>
+                  <Link to="/signup" className='p-3'>Sign Up</Link>
+                  <Link to="/" className='p-3'>Back to Homepage</Link>
+                </div>
                 <div className="clear" />
               </div>
-              <div className="social-icons"> 
-                <ul>
-                  <li><a href="#"><i className="fa fa-facebook" aria-hidden="true" /></a></li>
-                  <li><a href="#"><i className="fa fa-twitter" aria-hidden="true" /></a></li>
-                  <li><a href="#"><i className="fa fa-google-plus" aria-hidden="true" /></a></li> 
-                </ul>  
-              </div>
-              <input type="submit" defaultValue style={{ backgroundImage: `url(${arrow}) no-repeat 40% 50%` }}/>
+              <input className='login' type="submit" defaultValue/>
             </form>
           </div>
         </div>
-        {/*//main*/}
       </div>
     </div>
   )

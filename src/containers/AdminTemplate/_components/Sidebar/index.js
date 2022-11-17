@@ -28,7 +28,7 @@ export default function AdminSidebar() {
             <NavLink activeClassName='sidebar-active' className="nav-link" to="/users-management">Users Management</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName='sidebar-active' className="nav-link" to="/services-management">Services Management</NavLink>
+            <NavLink activeClassName='sidebar-active' className="nav-link" to="/products-management">Products Management</NavLink>
           </li>
           <li className="nav-item">
             <NavLink activeClassName='sidebar-active' className="nav-link" to="/catalog-management">Catalog Management</NavLink>

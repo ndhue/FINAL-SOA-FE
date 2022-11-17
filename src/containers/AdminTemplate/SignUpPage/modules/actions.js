@@ -4,9 +4,9 @@ import * as ActionTypes from './constants';
 export const actSignUp = info => {
   return (dispatch) => {
     dispatch(actSignUpRequest());
-    api.post("/api/auth/signup", info)
+    api.post("/users", info)
       .then(result => {
-        dispatch(actSignUpSuccess());
+        dispatch(actSignUpSuccess(result.data));
       })
       .catch(error => {
         dispatch(actSignUpFailed(error))

@@ -2,7 +2,7 @@ import React, { useEffect,  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { actFetchProductsData } from './modules/actions';
 import './style.css';
-export default function ShopArtPage() {
+export default function PersonInfoPage() {
   
   const dispatch = useDispatch();
 
@@ -31,13 +31,16 @@ export default function ShopArtPage() {
 
   return (
     <div>
-      <h5 className='text-center my-3 user-title'>Products check</h5>
+      <h5 className='text-center my-3 user-title'>USERS MANAGEMENT</h5>
+
       <table className="table table-striped mt-5 text-center">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Desc</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Manage</th>
           </tr>
         </thead>
         <tbody>

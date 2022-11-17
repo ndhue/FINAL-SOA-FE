@@ -147,13 +147,13 @@ export default function NavbarHome() {
                   <NavLink className="nav-link nav-active" to="/" >Trang chủ</NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/" >Cửa hàng</Link>
+                  <Link className="nav-link" to="/shop-art" >Cửa hàng</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/" >Giỏ hàng</Link>
+                  <Link className="nav-link" to="/cart" >Giỏ hàng</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/" >Trở thành họa sĩ</Link>
+                  <Link className="nav-link" to="/be-seller" >Trở thành người bán</Link>
                 </li>
               </ul>
             </div>
