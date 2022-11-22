@@ -37,7 +37,7 @@ export default function LoginPage(props) {
     if (loading) {
       return <Loading />
     }
-    return error && <div className='alert alert-danger mt-3'>{error}</div>
+    return error && <div className='alert alert-danger mx-4'>{error}</div>
   }
 
   if (localStorage.getItem("UserInfo")) {
@@ -59,14 +59,15 @@ export default function LoginPage(props) {
               <input placeholder="Enter Password" name="Password" type="password" required onChange={handleOnChange}/>
               <div className="checkbox-w3">
                 <div className='text-center mt-3'>
-                  <Link to="/signup" className='p-3'>Sign Up</Link>
-                  <Link to="/" className='p-3'>Back to Homepage</Link>
+                  <a href="/signup" className='p-3'>Sign Up</a>
+                  <a href="/" className='p-3'>Back to Homepage</a>
                 </div>
                 <div className="clear" />
               </div>
               <input className='login' type="submit" defaultValue/>
             </form>
           </div>
+          {notifications()}
         </div>
       </div>
     </div>

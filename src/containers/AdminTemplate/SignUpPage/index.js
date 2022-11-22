@@ -1,7 +1,6 @@
 import Loading from "components/Loading";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import { actResetSignUpMessenger, actSignUp } from "./modules/actions";
 import './style.css';
@@ -16,7 +15,7 @@ export default function SignUpPage() {
     username: "",
     password: "",
     phone: "",
-    gender: false, //?
+    gender: "",
     address: "",
   });
 
@@ -27,7 +26,7 @@ export default function SignUpPage() {
       username: "",
       password: "",
       phone: "",
-      gender: false, //?
+      gender: "",
       address: "",
     },
     formValid: false,
@@ -152,6 +151,7 @@ export default function SignUpPage() {
       errors: { ...valid.errors, [name]: mess },
     });
   };
+  
 
   if (localStorage.getItem("UserInfo")) {
     return <Redirect to="/"></Redirect>;
@@ -172,7 +172,7 @@ export default function SignUpPage() {
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.fullname && (
-              <div className="alert alert-danger mt-2">{valid.errors.fullname}</div>
+              <div className="alert alert-danger mx-4">{valid.errors.fullname}</div>
               )}
             </div>
             <div className="w3layouts">	
@@ -180,7 +180,7 @@ export default function SignUpPage() {
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.email && (
-                <div className="alert alert-danger mt-2">
+                <div className="alert alert-danger mx-4">
                   {valid.errors.email}
                 </div>
               )}
@@ -190,7 +190,7 @@ export default function SignUpPage() {
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.username && (
-                <div className="alert alert-danger mt-2">
+                <div className="alert alert-danger mx-4">
                   {valid.errors.username}
                 </div>
               )}
@@ -200,20 +200,26 @@ export default function SignUpPage() {
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.password && (
-                  <div className="alert alert-danger mt-2">
+                  <div className="alert alert-danger mx-4">
                     {valid.errors.password}
                   </div>
                 )}
             </div>	
             <div className="agileinfo">	
-              <input type="password" className="lock" name="confirm-password" placeholder="Confirm Password" id="password2" required />
+              <input type="password" className="lock" name="password2" placeholder="Confirm Password" id="password2" required
+              />
+              {valid.errors.password && (
+                  <div className="alert alert-danger mx-4">
+                    {valid.errors.password}
+                  </div>
+                )}
             </div>
             <div className="w3layouts">	
               <input type="tel" id="phone" name="phone" placeholder="0123456789" title="Please enter a valid number" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.phone && (
-                  <div className="alert alert-danger mt-2">
+                  <div className="alert alert-danger mx-4">
                     {valid.errors.phone}
                   </div>
               )}
@@ -234,7 +240,7 @@ export default function SignUpPage() {
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.address && (
-                  <div className="alert alert-danger mt-2">
+                  <div className="alert alert-danger mx-4">
                     {valid.errors.address}
                   </div>
                 )}
@@ -245,12 +251,12 @@ export default function SignUpPage() {
           </form>
           <div>{handleLoading()}</div>
             <div className="text-center mt-3">
-              <Link className="p-3" to="/login">
+              <a className="p-3" href="/login">
                 Login
-              </Link>
-              <Link className="p-3" to="/">
+              </a>
+              <a className="p-3" href="/">
                 Back to Homepage
-              </Link>
+              </a>
             </div>
           </div>
         <div className="clear" />

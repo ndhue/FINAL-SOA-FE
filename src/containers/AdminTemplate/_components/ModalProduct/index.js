@@ -1,64 +1,55 @@
+import { EventBusy } from "@mui/icons-material";
 import Loading from "components/Loading";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actManageProducts, actResetModal } from "./modules/actions";
 
 export default function AdminModalProduct(props) {
-  const { method, productEdit } = props;
-
+  const { method, productEdit} = props;
   const message = useSelector((state) => state.modalReducer.message);
   const loading = useSelector((state) => state.modalReducer.loading);
   const dispatch = useDispatch();
+  
+  const fileInput = useRef(null);
 
   const initialState = {
-    fullname: "",
-    email: "",
-    username: "",
-    password: "",
-    phone: "",
-    gender: false, //?
-    address: "",
+    product_name: "",
+    description: "",
+    price: "",
+    product_image: "",
   };
-
   const initialValid = {
     errors: {
-      fullname: "",
-      email: "",
-      username: "",
-      password: "",
-      phone: "",
-      gender: "",
-      address: "",
-      role: "",
+      product_name: "",
+      description: "",
+      price: "",
+      product_image: "",
     },
     formValid: false,
-    fullnameValid: false,
-    emailValid: false,
-    usernameValid: false,
-    passwordValid: false,
-    phoneValid: false,
-    address: false,
+    nameValid: false,
+    descValid: false,
+    priceValid: false,
+    productImageValid: false,
   };
+
+  
   const [valid, setValid] = useState({ ...initialValid });
   const [state, setState] = useState({ ...initialState });
 
   const handleResetForm = () => {
-    // dispatch(actResetModal());
-    // if (productEdit) {
+    dispatch(actResetModal());
+    if (productEdit) {
       
-    //   setState({
-    //     fullname: userEdit.fullname,
-    //     email: userEdit.email,
-    //     username: userEdit.username,
-    //     phone: userEdit.phone,
-    //     gender: userEdit.gender,
-    //     address: userEdit.address,
-    //     role: userEdit.role,
-    //   });
-    // } else {
-    //   setState({ ...initialState });
-    //   setValid({...initialValid});
-    // }
+      setState({
+        product_name: productEdit.product_name,
+        description: productEdit.description,
+        price: productEdit.price,
+        product_image: productEdit.product_image,
+      });
+    } else {
+      setState({ ...initialState });
+      setValid({...initialValid});
+    }
   };
 
   useEffect(() => {
@@ -69,10 +60,16 @@ export default function AdminModalProduct(props) {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  const refresh = () => {
+    window.location.reload();
+  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(actManageProducts(state, method, productEdit?.product_id));
-  };
+    console.log(state);
+    refresh();
+  }; 
 
   const handleLoading = () => {
     if (loading) {
@@ -196,137 +193,68 @@ export default function AdminModalProduct(props) {
             </button>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleOnSubmit}>
+            <form onSubmit={handleOnSubmit}>     
               <div className="form-group">
                 <input
                   className="form-control"
                   type="text"
-                  name="fullname"
-                  placeholder="Full name"
+                  name="product_name"
+                  placeholder="Name"
                   onChange={handleOnchange}
-                  value={state.fullname}
+                  value={state.product_name}
                   onBlur={handleErrors}
                 />
-                {valid.errors.fullname && (
+                {valid.errors.product_name && (
                   <div className="alert alert-danger mt-2">
-                    {valid.errors.fullname}
+                    {valid.errors.product_name}
                   </div>
                 )}
               </div>
               <div className="form-group">
-                <input
-                  className="form-control"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleOnchange}
-                  value={state.email}
-                  onBlur={handleErrors}
-                />
-                {valid.errors.email && (
-                  <div className="alert alert-danger mt-2">
-                    {valid.errors.email}
-                  </div>
-                )}
-              </div>
-              <div className="form-group">
-                <input
+                <textarea
                   className="form-control"
                   type="text"
-                  name="username"
-                  placeholder="Username"
+                  name="description"
+                  placeholder="Description"
                   onChange={handleOnchange}
-                  value={state.username}
+                  value={state.description}
                   onBlur={handleErrors}
                 />
-                {valid.errors.username && (
+                {valid.errors.description && (
                   <div className="alert alert-danger mt-2">
-                    {valid.errors.username}
+                    {valid.errors.description}
                   </div>
                 )}
               </div>
               <div className="form-group">
                 <input
                   className="form-control"
-                  disabled={productEdit ? true : false}
-                  type="password"
-                  name="password"
-                  autoComplete="on"
-                  placeholder={productEdit ? "Password" : "New password"}
+                  type="number"
+                  name="price"
+                  placeholder="Price"
                   onChange={handleOnchange}
+                  value={state.price}
                   onBlur={handleErrors}
                 />
-                {valid.errors.password && (
+                {valid.errors.price && (
                   <div className="alert alert-danger mt-2">
-                    {valid.errors.password}
+                    {valid.errors.price}
                   </div>
                 )}
               </div>
               <div className="form-group">
-                <input
-                  className="form-control"
-                  type="tel"
-                  name="phone"
-                  placeholder="Mobile number"
-                  onChange={handleOnchange}
-                  value={state.phone}
-                  onBlur={handleErrors}
-                />
-                {valid.errors.phone && (
-                  <div className="alert alert-danger mt-2">
-                    {valid.errors.phone}
-                  </div>
-                )}
+              <input
+                type="file"
+                name="product_image"
+                ref={fileInput}
+                onChange={e => setState({ ...state, [e.target.name]: fileInput.current.files[0] })}/>
               </div>
-              <div className="form-group">
-                <label>Gender</label>
-                <select
-                  className="custom-select"
-                  name="gender"
-                  value={state.gender}
-                  onChange={(e) => {
-                    setState({ ...state, [e.target.name]: e.target.value });
-                  }}
-                >
-                  <option value="Male">
-                    Male
-                  </option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Role</label>
-                <select
-                  className="custom-select"
-                  name="role"
-                  value={state.role}
-                  onChange={(e) => {
-                    setState({ ...state, [e.target.name]: e.target.value });
-                  }}
-                >
-                  <option>Customer</option>
-                  <option>Seller</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="address"
-                  placeholder="Address"
-                  onChange={handleOnchange}
-                  value={state.address}
-                  onBlur={handleErrors}
-                />
-                {valid.errors.address && (
-                  <div className="alert alert-danger mt-2">
-                    {valid.errors.address}
-                  </div>
-                )}
-              </div>
+              {/* <div className="form-group">
+                <img alt="not fount" width={"100px"} height={'100%'} object-fit={'contain'} src={URL.createObjectURL(fileInput)} />
+              </div> */}
               <div className="form-group text-center mt-3">
-                <button className="btn btn-success px-3" type="submit" disabled={productEdit?false:!valid.formValid} >
+                <button className="btn btn-success px-3" type="submit" >
+                  {/* disabled={productEdit?false:!valid.formValid} */}
                   {method}
                 </button>
               </div>

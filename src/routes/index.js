@@ -39,6 +39,16 @@ const routesHome = [
     path: "/cart",
     component: lazy(() => import("containers/HomeTemplate/CartPage"))
   },
+  {
+    exact: true,
+    path: "/detail/:id",
+    component: lazy(() => import("containers/HomeTemplate/DetailProductPage"))
+  },
+  {
+    exact: true,
+    path: "/user-info/:id",
+    component: lazy(() => import("containers/HomeTemplate/PersonInfoPage"))
+  },
 ];
 
 const routesUser = [
@@ -51,11 +61,6 @@ const routesUser = [
     exact: true,
     path: "/signup",
     component: lazy(() => import("containers/AdminTemplate/SignUpPage"))
-  },
-  {
-    exact: true,
-    path: "/personal-info",
-    component: lazy(() => import("containers/HomeTemplate/PersonInfoPage"))
   },
 ];
 

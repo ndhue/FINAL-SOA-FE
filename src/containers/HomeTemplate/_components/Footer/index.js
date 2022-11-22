@@ -1,8 +1,6 @@
 import React from 'react';
-import * as data from './data.json';
 import './style.css'
-
-
+import logo from './img/logo.png';
 
 export default function FooterHome() {
   return (
@@ -25,7 +23,7 @@ export default function FooterHome() {
         <hr />
         <div className='container d-flex justify-content-between align-items-center my-2'>
           <div className='d-flex align-items-center'>
-            <img src="assets/img/logo/logo.png" alt />
+            <img src={logo} alt='logo' />
           </div>
           <div className='d-flex align-items-center'>
             <div className='footer-icon'>

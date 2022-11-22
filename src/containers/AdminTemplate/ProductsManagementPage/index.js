@@ -23,19 +23,41 @@ export default function ProductsManagementPage() {
     setProductsData(data);
   }, [data]);
 
+  const refresh = () => {
+    window.location.reload();
+  }
+
   const handleDeleteProduct = id => {
     if (window.confirm("Delete?")) {
       dispatch(actDeleteProduct(id));
+      refresh();
     }
   }
 
+  const checkStatus = status =>{
+    if(status === "Chờ duyệt")
+      return (
+        <button className='btn btn-check'>
+          Chờ duyệt
+        </button>
+      )
+    else return (
+      <button className='btn btn-success' disabled>
+          Còn hàng
+        </button>
+    )
+  }
   const handleRenderTable = () => {
     return productsData?.map((product, index) => {
       return (
         <tr key={product.product_id}>
           <th scope="row">{index + 1}</th>
-          <td>{product.product_name}</td>
-          <td>{product.description}</td>
+          <td className='product-name'>{product.product_name}</td>
+          <td><div className='product-cover'>
+            <img className="product-image" src={`./assets/img/sale/`+`${product.product_image}`} alt='for sale' /></div>
+          </td>
+          <td>{product.price}</td>
+          <td>{checkStatus(`${product.status}`)}</td>
           <td>
             <button className='btn btn-edit mx-1' data-toggle="modal" data-target="#addModal" onClick={() => {
               setMethod("EDIT");
@@ -54,25 +76,17 @@ export default function ProductsManagementPage() {
     const keyword = removeVietnameseTones(searchInput.current.value).toLowerCase();
     switch (searchType) {
       case "name": {
-        searchingData = data.filter(user => {
-          if (user.name) {
-            return removeVietnameseTones(user.name.toLowerCase()).indexOf(keyword) >= 0
+        searchingData = data.filter(product => {
+          if (product.product_name) {
+            return removeVietnameseTones(product.product_name.toLowerCase()).indexOf(keyword) >= 0
           }
         });
         return setProductsData(searchingData);
       }
-      case "email": {
-        searchingData = data.filter(user => {
-          if (user.email) {
-            return removeVietnameseTones(user.email.toLowerCase()).indexOf(keyword) >= 0
-          }
-        });
-        return setProductsData(searchingData);
-      }
-      case "role": {
-        searchingData = data.filter(user => {
-          if (user.role) {
-            return removeVietnameseTones(user.role.toLowerCase()).indexOf(keyword) >= 0
+      case "status": {
+        searchingData = data.filter(product => {
+          if (product.status) {
+            return removeVietnameseTones(product.status.toLowerCase()).indexOf(keyword) >= 0
           }
         });
         return setProductsData(searchingData);
@@ -95,7 +109,7 @@ export default function ProductsManagementPage() {
             <select className="form-control" onChange={(e) => { setSearchType(e.target.value) }}>
               <option>All</option>
               <option value="name">By Name</option>
-              <option value="role">By Role</option>
+              <option value="status">By Status</option>
             </select>
           </div>
           <input className="form-control m-0 mx-2" type="search" placeholder="Find Product" aria-label="Search" ref={searchInput} />
@@ -113,7 +127,10 @@ export default function ProductsManagementPage() {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Role</th>
+            <th scope="col">View</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>

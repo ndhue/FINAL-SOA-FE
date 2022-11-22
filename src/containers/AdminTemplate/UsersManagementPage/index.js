@@ -26,7 +26,12 @@ export default function UsersManagementPage() {
   const handleDeleteUser = id => {
     if (window.confirm("Delete?")) {
       dispatch(actDeleteUser(id));
+      refresh();
     }
+  }
+
+  const refresh = () => {
+    window.location.reload();
   }
 
   const handleRenderTable = () => {
@@ -49,7 +54,6 @@ export default function UsersManagementPage() {
       )
     })
   }
-
   const handleSearch = () => {
     let searchingData = [];
     const keyword = removeVietnameseTones(searchInput.current.value).toLowerCase();

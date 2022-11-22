@@ -16,8 +16,9 @@ export default function AdminModal(props) {
     username: "",
     password: "",
     phone: "",
-    gender: false, //?
+    gender: "",
     address: "",
+    role: "",
   };
 
   const initialValid = {
@@ -69,9 +70,14 @@ export default function AdminModal(props) {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  const refresh = () => {
+    window.location.reload();
+  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(actManageUsers(state, method, userEdit?.user_id));
+    refresh();
   };
 
   const handleLoading = () => {
@@ -304,8 +310,8 @@ export default function AdminModal(props) {
                     setState({ ...state, [e.target.name]: e.target.value });
                   }}
                 >
-                  <option>Customer</option>
-                  <option>Seller</option>
+                  <option value="Customer">Customer</option>
+                  <option value="Seller">Seller</option>
                 </select>
               </div>
               <div className="form-group">

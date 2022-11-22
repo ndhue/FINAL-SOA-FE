@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import HomeCarousel from '../_components/Carousel';
 import HomeServicesSlider from './_components/Slider/ServicesSlider';
-import HomeTestimonialSlider from './_components/Slider/TestimonialSlider';
 import './style.css';
 
 export default function HomePage(props) {
@@ -13,21 +12,6 @@ export default function HomePage(props) {
   const handleOnChange = e => {
     localStorage.setItem("job-keyword", JSON.stringify(e.target.value.trim()));
   }
-
-  const select = item => { return document.querySelector(item) };
-  const handlePlayVideo = () => {
-    select(".home-video-bg")?.classList.add("show-video");
-    select(".freelance-video").autoplay = true;
-    select(".freelance-video").load();
-  }
-
-  window.addEventListener('mouseup', function (e) {
-    if (select(".home-video-bg") && select(".freelance-video") && e.target != select(".freelance-video")) {
-      select(".home-video-bg").classList.remove("show-video");
-      select(".freelance-video").autoplay = false;
-      select(".freelance-video").pause();
-    }
-  });
 
   const marketplaceData = [
     {
@@ -89,7 +73,7 @@ export default function HomePage(props) {
             <h1 className='home-title font-weight-bold'>THẾ GIỚI DIGITAL ART RỘNG LỚN</h1>
             <h3 className=''><i>Nơi bạn có thể trao đổi tác phẩm của bản thân</i></h3>
             <h3 className=''>Hãy tham gia ngay</h3>
-            <Link className="nav-link btn btn-success text-white btn-shop p-2" to="/signup" >Khám phá</Link>
+            <a className="nav-link btn btn-success text-white btn-shop p-2" href="/signup" >Khám phá</a>
           </div>
         </div>
       </header>
@@ -116,14 +100,14 @@ export default function HomePage(props) {
             </div>
             <div className="banner_container d-flex">
               <div className="single_banner position-relative col-8">
-                <img src="assets/img/bg/bg1.png" alt />
+                <img src="assets/img/bg/bg1.png" alt='background1' />
                 <figcaption className="banner_text position-absolute">
                   <h3>nhân vật anime <br /> yêu thích</h3>
                   <a className="btn btn-primary" href="shop.html">Khám phá</a>
                 </figcaption>
               </div>
               <div className="single_banner position-relative col-4">
-                <img src="assets/img/bg/bg2.png" alt />
+                <img src="assets/img/bg/bg2.png" alt='background2' />
               </div>
             </div>
           </div>

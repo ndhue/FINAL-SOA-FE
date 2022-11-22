@@ -4,7 +4,7 @@ import * as ActionType from './constants';
 export const actFetchProductsData = () => {
   return (dispatch) => {
     dispatch(actManageProductsRequest());
-    api.get("/api/products")
+    api.get("/products")
       .then(result => {
         dispatch(actManageProductsSuccess(result.data));
       })

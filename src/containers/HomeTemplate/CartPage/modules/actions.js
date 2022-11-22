@@ -1,32 +1,33 @@
 import api from 'utils/apiUtils';
 import * as ActionType from './constants';
 
-export const actFetchProductsData = () => {
+export const actFetchCartData = () => {
   return (dispatch) => {
-    dispatch(actManageProductsRequest());
-    api.get("/products")
+    dispatch(actManageCartRequest());
+    api.get("/carts")
       .then(result => {
-        dispatch(actManageProductsSuccess(result.data));
+          dispatch(actManageCartSuccess(result.data));
+        
       })
       .catch(error => {
-        dispatch(actManageProductsFailed(error));
+        dispatch(actManageCartFailed(error));
       });
   }
 }
-const actManageProductsRequest = () => {
+const actManageCartRequest = () => {
   return {
-    type: ActionType.PRODUCTS_MANAGEMENT_REQUEST,
+    type: ActionType.CART_MANAGEMENT_REQUEST,
   }
 };
-const actManageProductsSuccess = data => {
+const actManageCartSuccess = data => {
   return {
-    type: ActionType.PRODUCTS_MANAGEMENT_SUCCESS,
+    type: ActionType.CART_MANAGEMENT_SUCCESS,
     payload: data
   }
 };
-const actManageProductsFailed = error => {
+const actManageCartFailed = error => {
   return {
-    type: ActionType.PRODUCTS_MANAGEMENT_FAILED,
+    type: ActionType.CART_MANAGEMENT_FAILED,
     payload: error
   }
 };

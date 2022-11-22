@@ -5,7 +5,7 @@ import { actFetchJobTypes } from './modules/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { actSearchJobs } from 'containers/HomeTemplate/HomePage/modules/actions';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import logo from './img/logo.png';
 export default function NavbarHome() {
   const history = useHistory();
   const searchInput = useRef(null);
@@ -32,32 +32,32 @@ export default function NavbarHome() {
   }
 
   const handleRenderLoginSpace = () => {
-    if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).user.role === "ADMIN") {
+    if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).user.role === "Admin") {
       return (
         <>
-          <a className="nav-link m-1 btn-join m-auto px-3" style={{ cursor: "pointer" }} onClick={() => {
+          <Link className="nav-link m-1 btn-join m-auto px-3" style={{ cursor: "pointer" }} onClick={() => {
             if (window.confirm("Logout?")) {
               localStorage.removeItem("UserInfo");
               setIsLogin(false);
             }
-          }}>Logout</a>
+          }}>Logout</Link>
           <li className="nav-item">
             <Link className="nav-link btn btn-join text-white ml-1" to="/users-management">Dashboard</Link>
           </li>
         </>
       )
-    } else if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).user.role === "CLIENT") {
+    } else if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).user.role === "Customer") {
       return (
         <>
           <li className="nav-item">
             <Link className="nav-link" to="/user-page" >User Info</Link>
           </li>
-          <a className="nav-link px-1" style={{ cursor: "pointer" }} onClick={() => {
+          <Link className="nav-link px-1" style={{ cursor: "pointer" }} onClick={() => {
             if (window.confirm("Logout?")) {
               localStorage.removeItem("UserInfo");
               setIsLogin(false);
             }
-          }}>Logout</a>
+          }}>Logout</Link>
         </>
       )
     } else {
@@ -126,9 +126,10 @@ export default function NavbarHome() {
       <div className='container'>
         <nav className="navbar navbar-expand-lg nav-top">
           <div className='d-flex'>
-            <Link className="navbar-brand" to="/">
-            <a className="sticky_none" href="index.html"><img src="assets/img/logo/logo.png" alt /><h3 className='font-weight-bold'>DIGITAL ART</h3></a>
-            </Link>
+            <NavLink className="navbar-brand" to="/">
+                <img src={logo} alt="logo" />
+                <h3 className='font-weight-bold'>DIGITAL ART</h3>
+            </NavLink>
             <form className="form-inline my-2 my-lg-0 navbar-search" onSubmit={(e) => {
               e.preventDefault();
               handleOnSubmit();
@@ -144,7 +145,7 @@ export default function NavbarHome() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <NavLink className="nav-link nav-active" to="/" >Trang chủ</NavLink>
+                  <NavLink className="nav-link" to="/" >Trang chủ</NavLink>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/shop-art" >Cửa hàng</Link>
@@ -163,14 +164,6 @@ export default function NavbarHome() {
           </div>
         </nav>
       </div >
-      <hr />
-      <div className='container'>
-        <nav className="navbar navbar-expand-lg m-0 p-0 nav-bottom">
-          <div className="navbar-nav mr-auto w-100 justify-content-between">
-            
-          </div>
-        </nav>
-      </div>
       <hr />
     </div>
   )

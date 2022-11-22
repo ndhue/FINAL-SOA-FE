@@ -4,7 +4,7 @@ import api from 'utils/apiUtils';
 export const actFetchJobTypes = () => {
   return (dispatch) => {
     dispatch(actJobTypesRequest());
-    api.get("/api/type-jobs")
+    api.get("/")
       .then(result => {
         dispatch(actJobTypesSuccess(result.data));
       })

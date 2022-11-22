@@ -1,33 +1,58 @@
+import * as ActionTypes from './constants';
 import api from 'utils/apiUtils';
-import * as ActionType from './constants';
 
-export const actFetchProductsData = () => {
-  return (dispatch) => {
-    dispatch(actManageProductsRequest());
-    api.get("/products")
+const actFetchUsersDataByID = id => {
+  return dispatch => {
+    dispatch(actUserInfoRequest());
+    api.get(`/users/${id}`)
       .then(result => {
-        dispatch(actManageProductsSuccess(result.data));
+        dispatch(actUserInfoSuccess(result.data));
       })
       .catch(error => {
-        dispatch(actManageProductsFailed(error));
+        dispatch(actUserInfoFailed(error));
       });
   }
 }
-const actManageProductsRequest = () => {
+
+const actEditUsersDataByID = (info, method, id) => {
+  return dispatch => {
+    if (method == "EDIT") {
+      api.put(`/users/${id}`, info)
+        .then(result => {
+          dispatch(actUserInfoEditSuccess(result.data));
+        })
+        .catch(error => {
+          dispatch(actUserInfoEditFailed(error))
+        });
+      }
+  }
+}
+
+const actUserInfoRequest = () => {
   return {
-    type: ActionType.PRODUCTS_MANAGEMENT_REQUEST,
+    type: ActionTypes.USER_INFO_REQUEST,
   }
 };
-const actManageProductsSuccess = data => {
+const actUserInfoSuccess = data => {
   return {
-    type: ActionType.PRODUCTS_MANAGEMENT_SUCCESS,
+    type: ActionTypes.USER_INFO_SUCCESS,
     payload: data
   }
 };
-const actManageProductsFailed = error => {
+const actUserInfoFailed = error => {
   return {
-    type: ActionType.PRODUCTS_MANAGEMENT_FAILED,
+    type: ActionTypes.USER_INFO_FAILED,
     payload: error
   }
 };
 
+const actUserInfoEditSuccess = () => ({
+  type: ActionTypes.USER_INFO_SUCCESS,
+});
+
+const actUserInfoEditFailed = error => ({
+  type: ActionTypes.USER_INFO_FAILED,
+  payload: error
+});
+
+export { actFetchUsersDataByID, actEditUsersDataByID };
