@@ -21,11 +21,6 @@ const routesHome = [
   },
   {
     exact: true,
-    path: "/info",
-    component: lazy(() => import("containers/HomeTemplate/InfoPage"))
-  },
-  {
-    exact: true,
     path: "/user-page",
     component: lazy(() => import("containers/HomeTemplate/UserPage"))
   },
@@ -48,6 +43,16 @@ const routesHome = [
     exact: true,
     path: "/user-info/:id",
     component: lazy(() => import("containers/HomeTemplate/PersonInfoPage"))
+  },
+  {
+    exact: true,
+    path: "/pay",
+    component: lazy(() => import("containers/HomeTemplate/PayPage"))
+  },
+  {
+    exact: true,
+    path: "/infopay",
+    component: lazy(() => import("containers/HomeTemplate/InfoDigitalPay"))
   },
 ];
 

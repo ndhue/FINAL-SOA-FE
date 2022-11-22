@@ -3,14 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { actFetchJobTypes } from './modules/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { actSearchJobs } from 'containers/HomeTemplate/HomePage/modules/actions';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import logo from './img/logo.png';
 export default function NavbarHome() {
   const history = useHistory();
   const searchInput = useRef(null);
   const [isLogin, setIsLogin] = useState(localStorage.getItem("UserInfo") ? true : false);
-  const jobs = useSelector(state => state.jobTypesReducer.jobTypes);
   const dispatch = useDispatch();
 
   const selectALl = items => { return document.querySelectorAll(items) };
@@ -23,12 +21,6 @@ export default function NavbarHome() {
 
   const handleOnChange = (e) => {
     localStorage.setItem("job-keyword", JSON.stringify(e.target.value.trim()));
-  }
-
-  const handleOnSubmit = () => {
-    const keyword = localStorage.getItem("job-keyword") ? JSON.parse(localStorage.getItem("job-keyword")) : searchInput.current.value;
-    dispatch(actSearchJobs(keyword));
-    history.push("/search");
   }
 
   const handleRenderLoginSpace = () => {
@@ -130,10 +122,7 @@ export default function NavbarHome() {
                 <img src={logo} alt="logo" />
                 <h3 className='font-weight-bold'>DIGITAL ART</h3>
             </NavLink>
-            <form className="form-inline my-2 my-lg-0 navbar-search" onSubmit={(e) => {
-              e.preventDefault();
-              handleOnSubmit();
-            }}>
+            <form className="form-inline my-2 my-lg-0 navbar-search">
               <input className="form-control mr-sm-2" style={{ minWidth: 200 }} type="search" placeholder={localStorage.getItem("job-keyword") ? JSON.parse(localStorage.getItem("job-keyword")) : "Find Services"} aria-label="Search" onChange={handleOnChange} ref={searchInput} />
               <button className="btn btn-outline-success" type='submit'>Search</button>
             </form>
