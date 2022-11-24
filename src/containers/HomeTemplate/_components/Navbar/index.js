@@ -54,13 +54,14 @@ export default function NavbarHome() {
       )
     } else {
       return (
-        <>
+        <><div className="collapse navbar-collapse" id="navbarNav">
           <li className="nav-item">
             <Link className="nav-link" to="/login" >Login</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link btn btn-primary text-white px-3 ml-1 btn-join" to="/signup" >Join</Link>
           </li>
+          </div>
         </>
       )
     }

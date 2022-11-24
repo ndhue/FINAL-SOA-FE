@@ -54,6 +54,21 @@ const routesHome = [
     path: "/infopay",
     component: lazy(() => import("containers/HomeTemplate/InfoDigitalPay"))
   },
+  {
+    exact: true,
+    path: "/be-seller",
+    component: lazy(() => import("containers/HomeTemplate/SignUpSeller"))
+  },
+  {
+    exact: true,
+    path: "/order",
+    component: lazy(() => import("containers/HomeTemplate/OrderPage"))
+  },
+  {
+    exact: true,
+    path: "/detailorder",
+    component: lazy(() => import("containers/HomeTemplate/DetailOrder"))
+  },
 ];
 
 const routesUser = [

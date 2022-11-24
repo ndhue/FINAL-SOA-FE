@@ -1,3 +1,7 @@
+
+#navbarNavShop li{
+    margin: 0 20px;
+}
 /*--A Design by W3layouts 
 Author: W3layout
 Author URL: http://w3layouts.com
@@ -141,7 +145,7 @@ p.agileits2 {
     float: left;
     padding: 15px 0 0;
 }
-input#fullname,input#email,input#password1,input#password2, input#phone, select#role, select#gender, input#address, input#username {
+input#fullname,input#email,input#numberbank, input#phone, select#role, select#gender, input#address, input#storename {
 	width:300px;
 	height:40px;
 	padding:0 15px;
@@ -159,7 +163,7 @@ input#fullname,input#email,input#password1,input#password2, input#phone, select#
 	display:block;
 	outline:none;
 }
-input#fullname:focus,input#email:focus,input#password1:focus,input#password2:focus, input#phone:focus, select#role:focus, select#gender:focus, input#address:focus, input#username:focus, input#fullname:hover,input#email:hover,input#password1:hover,input#password2:hover, input#phone:hover, select#role:hover, select#gender:hover, input#address:hover, input#username:hover {
+input#fullname:focus,input#email:focus,input#numberbank:focus, input#phone:focus, select#role:focus, select#gender:focus, input#address:focus, input#storename:focus, input#fullname:hover,input#email:hover,input#password1:hover,input#password2:hover, input#phone:hover, select#role:hover, select#gender:hover, input#address:hover {
 	color:#fff;
 	border-bottom:5px solid #3970b0;
 }
@@ -244,7 +248,7 @@ p.copyright {
 p.wthree {
     font-size: 14px;
 }
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#numberbank {
 	font-size:15px;
 }
 }
@@ -266,7 +270,7 @@ h2.agileits1 {
 }
 
 @media (max-width: 800px) {
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#numberbank {
     width: 260px;
 }
 input.register {
@@ -334,7 +338,7 @@ h1.w3ls {
 }
 
 @media (max-width: 384px) {
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#numberbank {
     width: 230px;
 	height: 40px;
 }
@@ -381,7 +385,7 @@ h2.agileits1 {
 p.agileits2 {
     font-size: 13px;
 }
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#numberbank{
     width: 195px;
     height: 40px;
 	font-size: 14px;
@@ -410,3 +414,4 @@ p.copyright {
 
 
 /*-- /responsive design --*/
+
