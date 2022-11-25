@@ -16,11 +16,6 @@ const routesHome = [
   },
   {
     exact: true,
-    path: "/job-detail/:jobId",
-    component: lazy(() => import("containers/HomeTemplate/JobDetailsPage"))
-  },
-  {
-    exact: true,
     path: "/user-page",
     component: lazy(() => import("containers/HomeTemplate/UserPage"))
   },
