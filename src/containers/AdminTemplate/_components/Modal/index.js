@@ -187,7 +187,7 @@ export default function AdminModal(props) {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{method} USER</h5>
+            <h5 className="modal-title">{method} Người dùng</h5>
             <button
               type="button"
               className="close"
@@ -207,7 +207,7 @@ export default function AdminModal(props) {
                   className="form-control"
                   type="text"
                   name="fullname"
-                  placeholder="Full name"
+                  placeholder="Họ tên"
                   onChange={handleOnchange}
                   value={state.fullname}
                   onBlur={handleErrors}
@@ -239,7 +239,7 @@ export default function AdminModal(props) {
                   className="form-control"
                   type="text"
                   name="username"
-                  placeholder="Username"
+                  placeholder="Tài khoản"
                   onChange={handleOnchange}
                   value={state.username}
                   onBlur={handleErrors}
@@ -257,7 +257,7 @@ export default function AdminModal(props) {
                   type="password"
                   name="password"
                   autoComplete="on"
-                  placeholder={userEdit ? "Password" : "New password"}
+                  placeholder={userEdit ? "Mật khẩu" : "Mật khẩu mới"}
                   onChange={handleOnchange}
                   onBlur={handleErrors}
                 />
@@ -272,7 +272,7 @@ export default function AdminModal(props) {
                   className="form-control"
                   type="tel"
                   name="phone"
-                  placeholder="Mobile number"
+                  placeholder="Số điện thoại"
                   onChange={handleOnchange}
                   value={state.phone}
                   onBlur={handleErrors}
@@ -294,10 +294,10 @@ export default function AdminModal(props) {
                   }}
                 >
                   <option value="Male">
-                    Male
+                    Name
                   </option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
+                  <option value="Female">Nữ</option>
+                  <option value="Other">Khác</option>
                 </select>
               </div>
               <div className="form-group">
@@ -310,8 +310,8 @@ export default function AdminModal(props) {
                     setState({ ...state, [e.target.name]: e.target.value });
                   }}
                 >
-                  <option value="Customer">Customer</option>
-                  <option value="Seller">Seller</option>
+                  <option value="Customer">Khách hàng</option>
+                  <option value="Seller">Người bán</option>
                 </select>
               </div>
               <div className="form-group">
@@ -319,7 +319,7 @@ export default function AdminModal(props) {
                   className="form-control"
                   type="text"
                   name="address"
-                  placeholder="Address"
+                  placeholder="Địa chỉ"
                   onChange={handleOnchange}
                   value={state.address}
                   onBlur={handleErrors}
@@ -342,11 +342,4 @@ export default function AdminModal(props) {
       </div>
     </div>
   );
-}
-
-{
-  /* <div className="custom-control custom-checkbox">
-  <input type="checkbox" class="custom-control-input" id="customCheck1">
-  <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-</div> */
 }

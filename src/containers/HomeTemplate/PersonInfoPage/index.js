@@ -296,7 +296,7 @@ export default function PersonInfoPage(props) {
                             <div className="form-group focused">
                               <label className="form-control-label" htmlFor="input-username">Username</label>
                               <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" name="username"
-                              value={state.username} disabled={method==='EDIT'?false:true}
+                              value={state.username ?? ''} disabled={method==='EDIT'?false:true}
                               onChange={handleOnchange}
                               onBlur={handleErrors}/>
                             </div>
@@ -309,7 +309,7 @@ export default function PersonInfoPage(props) {
                           <div className="col-lg-6">
                             <div className="form-group">
                               <label className="form-control-label" htmlFor="input-email">Email address</label>
-                              <input type="email" id="input-email" className="form-control form-control-alternative" name="email" value={state.email} disabled={method==='EDIT'?false:true}
+                              <input type="email" id="input-email" className="form-control form-control-alternative" name="email" value={state.email ?? ''} disabled={method==='EDIT'?false:true}
                               onChange={handleOnchange}
                               onBlur={handleErrors}/>
                             </div>
@@ -324,7 +324,7 @@ export default function PersonInfoPage(props) {
                           <div className="col-lg-6">
                             <div className="form-group focused">
                               <label className="form-control-label" htmlFor="input-first-name">Full name</label>
-                              <input type="text" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" name="fullname" value={state.fullname} disabled={method==='EDIT'?false:true}
+                              <input type="text" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" name="fullname" value={state.fullname ?? ''} disabled={method==='EDIT'?false:true}
                               onChange={handleOnchange}
                               onBlur={handleErrors}/>
                             </div>
@@ -337,7 +337,7 @@ export default function PersonInfoPage(props) {
                           <div className="col-lg-6">
                             <div className="form-group focused">
                               <label className="form-control-label" htmlFor="input-last-name">Role</label>
-                              <input type="text" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" name="role" value={state.role} disabled/>
+                              <input type="text" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" name="role" value={state.role ?? ''} disabled/>
                             </div>
                           </div>
                         </div>
@@ -350,7 +350,7 @@ export default function PersonInfoPage(props) {
                           <div className="col-md-12">
                             <div className="form-group focused">
                               <label className="form-control-label" htmlFor="input-address">Address</label>
-                              <input id="input-address" className="form-control form-control-alternative" placeholder="Home Address" defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text" value={state.address} disabled={method==='EDIT'?false:true}
+                              <input id="input-address" className="form-control form-control-alternative" placeholder="Home Address" defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text" value={state.address ?? ''} disabled={method==='EDIT'?false:true}
                               onChange={handleOnchange}
                               onBlur={handleErrors}/>
                             </div>
@@ -365,7 +365,7 @@ export default function PersonInfoPage(props) {
                         <div className="col-md-12">
                             <div className="form-group focused">
                               <label className="form-control-label" htmlFor="input-address">Phone</label>
-                              <input id="input-address" className="form-control form-control-alternative" placeholder="Home Address" defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text" value={state.phone} disabled={method==='EDIT'?false:true}
+                              <input id="input-address" className="form-control form-control-alternative" placeholder="Home Address" defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text" value={state.phone ?? ''} disabled={method==='EDIT'?false:true}
                               onChange={handleOnchange}
                               onBlur={handleErrors}/>
                             </div>

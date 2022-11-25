@@ -4,66 +4,7 @@ import HomeCarousel from '../_components/Carousel';
 import HomeServicesSlider from './_components/Slider/ServicesSlider';
 import './style.css';
 
-export default function HomePage(props) {
-  const handleOnSubmit = e => {
-    e.preventDefault();
-    props.history.push("/search");
-  }
-  const handleOnChange = e => {
-    localStorage.setItem("job-keyword", JSON.stringify(e.target.value.trim()));
-  }
-
-  const marketplaceData = [
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/graphics-design.d32a2f8.svg',
-      title: 'Graphics & Design'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/online-marketing.74e221b.svg',
-      title: 'Digital Marketing'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/writing-translation.32ebe2e.svg',
-      title: 'Writing & Translation'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/video-animation.f0d9d71.svg',
-      title: 'Video & Animation'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/music-audio.320af20.svg',
-      title: 'Music & Audio'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/programming.9362366.svg',
-      title: 'Programming & Tech'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/business.bbdf319.svg',
-      title: 'Business'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/lifestyle.745b575.svg',
-      title: 'Lifestyle'
-    },
-    {
-      img: 'https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/data.718910f.svg',
-      title: 'Data'
-    },
-  ];
-  const handleRenderMarketplace = () => {
-    return marketplaceData.map((item, index) => {
-      return (
-        <div key={index} className='home-explore-item'>
-          <a>
-            <img src={item.img}></img>
-            <p className='m-0'>{item.title}</p>
-          </a>
-        </div>
-      );
-    });
-  };
-
+export default function HomePage() {
   return (
     <section className='home-page'>
       <header>
@@ -92,7 +33,7 @@ export default function HomePage(props) {
           <HomeServicesSlider />
         </div>
       </section>
-      <section className='containerr'>
+      <section className='container'>
         <section className="banner_section">
           <div className="container">
             <div className="section_title">
@@ -113,14 +54,8 @@ export default function HomePage(props) {
           </div>
         </section>
       </section>
-
-      <section className='home-explore'>
-        <div className='container'>
-          <h2>Explore the marketplace</h2>
-          <div className='row'>
-            {handleRenderMarketplace()}
-          </div>
-        </div>
+      <section className='container'>
+        
       </section>
     </section>
   )

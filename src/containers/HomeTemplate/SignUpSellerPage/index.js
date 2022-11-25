@@ -2,18 +2,18 @@ import Loading from "components/Loading";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { actResetSignUpMessenger, actSignUp } from "./modules/actions";
+import { actResetSignUpMessenger, actSignUp } from "../../AdminTemplate/SignUpPage/modules/actions";
 import './style.css';
 import background1 from "./img/banner.jpg";
 import background2 from "./img/content.jpg";
-export default function SignUpPage() {
+export default function SignUpSeller() {
   const formInput = useRef(null);
 
   const [info, setInfo] = useState({
     fullname: "",
     email: "",
-    username: "",
-    password: "",
+    storename: "",
+    numberbank:"",
     phone: "",
     gender: "",
     address: "",
@@ -23,8 +23,8 @@ export default function SignUpPage() {
     errors: {
       fullname: "",
       email: "",
-      username: "",
-      password: "",
+      storename: "",
+      numberbank:"",
       phone: "",
       gender: "",
       address: "",
@@ -32,8 +32,8 @@ export default function SignUpPage() {
     formValid: false,
     fullnameValid: false,
     emailValid: false,
-    usernameValid: false,
-    passwordValid: false,
+    storenameValid: false,
+    numberbankValid: false,
     phoneValid: false,
     address: false,
   };
@@ -72,9 +72,9 @@ export default function SignUpPage() {
     let {
       fullnameValid,
       emailValid,
-      usernameValid,
-      passwordValid,
+      storenameValid,  
       phoneValid,
+      numberbankValid,
       addressValid,
       formValid,
     } = valid;
@@ -87,7 +87,7 @@ export default function SignUpPage() {
           "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$";
         if (value && !value.match(pattern)) {
           fullnameValid = false;
-          mess = "Your name seems invalid";
+          mess = "Tên bạn không hợp lệ";
         } else {
           fullnameValid = true;
         }
@@ -98,25 +98,18 @@ export default function SignUpPage() {
         let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (value && !value.match(pattern)) {
           emailValid = false;
-          mess = "Your email seems invalid";
+          mess = "Email bạn không hợp lệ";
         } else {
           emailValid = true;
         }
         break;
       }
-      case "username": {
-        usernameValid = mess === "" ? true : false;
+      case "storename": {
+        storenameValid = mess === "" ? true : false;
         break;
       }
-      case "password": {
-        passwordValid = mess === "" ? true : false;
-        let pattern = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
-        if (value && !value.match(pattern)) {
-          passwordValid = false;
-          mess = "Your password seems invalid";
-        } else {
-          passwordValid = true;
-        }
+      case "numberbank": {
+        numberbankValid = mess === "" ? true : false;
         break;
       }
       case "phone": {
@@ -139,13 +132,13 @@ export default function SignUpPage() {
         break;
     }
     formValid =
-      fullnameValid & emailValid & usernameValid & passwordValid & phoneValid & addressValid;
+      fullnameValid & emailValid & storenameValid  & phoneValid & addressValid& numberbankValid;
     setValid({
       formValid,
       fullnameValid,
       emailValid,
-      usernameValid,
-      passwordValid,
+      storenameValid,
+      numberbankValid,
       phoneValid,
       addressValid,
       errors: { ...valid.errors, [name]: mess },
@@ -159,16 +152,16 @@ export default function SignUpPage() {
   return (
     <>
       <div className="body-signup" style={{ backgroundImage: `url(${background1})` }}>
-        <h1 className="w3ls">Đăng ký thành viên</h1>
+        <h1 className="w3ls">Trở thành người bán hàng</h1>
         <div className="content-w3ls">
           <div className="content-agile1" style={{ backgroundImage: `url(${background2})` }}>
-            <h2 className="agileits1">DIGITAL ART</h2>
-            <p className="agileits2">Tham gia vào thế giới Digital Art rộng lớn</p>
+            <h2 className="agileits1">Official</h2>
+            
           </div>
         <div className="content-agile2">
           <form onSubmit={handleSubmit} ref={formInput}>
             <div className="w3layouts"> 
-              <input type="text" id="fullname" name="fullname" placeholder="Họ tên" title="Nhập họ tên" required 
+              <input type="text" id="fullname" name="fullname" placeholder="Họ và tên" title="Vui lòng nhập họ tên" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.fullname && (
@@ -176,7 +169,7 @@ export default function SignUpPage() {
               )}
             </div>
             <div className="w3layouts">	
-              <input type="email" id="email" name="email" placeholder="mail@example.com" title="Nhập email" required 
+              <input type="email" id="email" name="email" placeholder="Email" title="Vui lòng nhập email" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.email && (
@@ -186,36 +179,27 @@ export default function SignUpPage() {
               )}
             </div>
             <div className="w3layouts">	
-              <input type="text" id="username" name="username" placeholder="Tài khoản" title="Tài khoản" required 
+              <input type="text" id="storename" name="storename" placeholder="Tên cửa hàng" title="vui lòng nhập tên cửa hàng" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
-              {valid.errors.username && (
+              {valid.errors.storename && (
                 <div className="alert alert-danger mx-4">
-                  {valid.errors.username}
+                  {valid.errors.storename}
                 </div>
               )}
             </div>
-            <div className="agileinfo">	
-              <input type="password" className="lock" name="password" placeholder="Mật khẩu" id="password1" required 
+            <div className="w3layouts">	
+              <input type="text" id="numberbank" name="numberbank" placeholder="Tài khoản ngân hàng" title="Vui lòng nhập tài khoản ngân hàng" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
-              {valid.errors.password && (
+              {valid.errors.phone && (
                   <div className="alert alert-danger mx-4">
-                    {valid.errors.password}
+                    {valid.errors.phone}
                   </div>
-                )}
-            </div>	
-            <div className="agileinfo">	
-              <input type="password" className="lock" name="password2" placeholder="Xác nhận mật khẩu" id="password2" required
-              />
-              {valid.errors.password && (
-                  <div className="alert alert-danger mx-4">
-                    {valid.errors.password}
-                  </div>
-                )}
+              )}
             </div>
             <div className="w3layouts">	
-              <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" title="Hãy nhập số điện thoại hợp lệ" required 
+              <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" title="Vui lòng nhập số điện thoại" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.phone && (
@@ -228,6 +212,7 @@ export default function SignUpPage() {
                 <select name="gender" id="gender"
                 onChange={handleOnchange}
                 onBlur={handleErrors}>
+                  <option>Giới tính</option>
                   <option value="Male">Nam</option>
                   <option value="Female">Nữ</option>
                   <option value="Other">Khác</option>
@@ -235,7 +220,7 @@ export default function SignUpPage() {
             </div>
             <div className="w3layouts">	
               <input type="text" id="address" name="address"
-              className="address" placeholder="Địa chỉ" title="Hãy nhập địa chỉ hợp lệ" required 
+              className="address" placeholder="Địa chỉ" title="Vui lòng nhập địa chỉ" required 
               onChange={handleOnchange}
               onBlur={handleErrors}/>
               {valid.errors.address && (
@@ -245,14 +230,11 @@ export default function SignUpPage() {
                 )}
             </div>			
             <button className="btn btn-sign-up register" type="submit" disabled={!valid.formValid}>
-            Đăng ký
+            Đăng kí
           </button>
           </form>
           <div>{handleLoading()}</div>
-            <div className="text-center">
-              <a className="px-3 mb-2" href="/login">Đăng nhập</a>
-              <a className="px-3 mb-2" href="/">Trở lại trang chủ</a>
-            </div>
+            
           </div>
         <div className="clear" />
       </div>

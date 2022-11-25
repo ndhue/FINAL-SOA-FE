@@ -4,6 +4,7 @@ import AdminModalProduct from '../_components/ModalProduct'
 import { removeVietnameseTones } from '../_components/Modal/validation';
 import { actDeleteProduct, actFetchProductsData } from './modules/actions';
 import './style.css';
+import VND from 'components/CurrencyFormat';
 export default function ProductsManagementPage() {
   const searchInput = useRef(null);
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ export default function ProductsManagementPage() {
         </button>
     )
   }
+
   const handleRenderTable = () => {
     return productsData?.map((product, index) => {
       return (
@@ -54,15 +56,15 @@ export default function ProductsManagementPage() {
           <th scope="row">{index + 1}</th>
           <td className='product-name'>{product.product_name}</td>
           <td><div className='product-cover'>
-            <img className="product-image" src={`./assets/img/sale/`+`${product.product_image}`} alt='for sale' /></div>
+            <img className="product-image" src={`http://localhost:9090/file/`+`${product.product_image}`} alt='for sale' /></div>
           </td>
-          <td>{product.price}</td>
+          <td>{VND.format(product.price)}</td>
           <td>{checkStatus(`${product.status}`)}</td>
           <td>
             <button className='btn btn-edit mx-1' data-toggle="modal" data-target="#addModal" onClick={() => {
-              setMethod("EDIT");
+              setMethod("Chỉnh sửa");
               setProductEdit(product)
-            }}>Edit</button>
+            }}>Chỉnh sửa</button>
             <button className='btn btn-del mx-1' onClick={() => { handleDeleteProduct(product.product_id) }
             }>×</button>
           </td>
@@ -99,7 +101,7 @@ export default function ProductsManagementPage() {
 
   return (
     <div>
-      <h5 className='text-center my-3 user-title'>PRODUCTS MANAGEMENT</h5>
+      <h5 className='text-center my-3 user-title'>QUẢN LÝ SẢN PHẨM</h5>
       <div className='d-flex justify-content-between mx-5'>
         <form className="form-inline my-2 my-lg-0" onSubmit={(e) => {
           e.preventDefault();
@@ -107,18 +109,18 @@ export default function ProductsManagementPage() {
         }}>
           <div className="form-group">
             <select className="form-control" onChange={(e) => { setSearchType(e.target.value) }}>
-              <option>All</option>
-              <option value="name">By Name</option>
-              <option value="status">By Status</option>
+              <option>Tất cả</option>
+              <option value="name">Theo tên</option>
+              <option value="status">Theo trạng thái</option>
             </select>
           </div>
-          <input className="form-control m-0 mx-2" type="search" placeholder="Find Product" aria-label="Search" ref={searchInput} />
-          <button className="btn m-0 btn-search" type="submit">Search</button>
+          <input className="form-control m-0 mx-2" type="search" placeholder="Tìm kiếm" aria-label="Search" ref={searchInput} />
+          <button className="btn m-0 btn-search" type="submit">Tìm kiếm</button>
         </form>
         <button className="btn btn-add-user" data-toggle="modal" data-target="#addModal" onClick={() => {
-          setMethod("ADD");
+          setMethod("Thêm");
           setProductEdit(null)
-        }}> + Add Product</button>
+        }}> + Thêm sản phẩm</button>
       </div>
       <AdminModalProduct method={method} productEdit={productEdit} />
 
@@ -126,10 +128,10 @@ export default function ProductsManagementPage() {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">View</th>
-            <th scope="col">Price</th>
-            <th scope="col">Status</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Hình ản</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Trạng thái</th>
             <th scope="col"></th>
           </tr>
         </thead>

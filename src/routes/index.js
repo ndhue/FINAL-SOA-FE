@@ -31,7 +31,7 @@ const routesHome = [
   },
   {
     exact: true,
-    path: "/cart",
+    path: "/cart/:id",
     component: lazy(() => import("containers/HomeTemplate/CartPage"))
   },
   {
@@ -53,6 +53,21 @@ const routesHome = [
     exact: true,
     path: "/infopay",
     component: lazy(() => import("containers/HomeTemplate/InfoDigitalPay"))
+  },
+  {
+    exact: true,
+    path: "/be-seller",
+    component: lazy(() => import("containers/HomeTemplate/SignUpSellerPage"))
+  },
+  {
+    exact: true,
+    path: "/order",
+    component: lazy(() => import("containers/HomeTemplate/OrderPage"))
+  },
+  {
+    exact: true,
+    path: "/detail-order",
+    component: lazy(() => import("containers/HomeTemplate/DetailOrderPage"))
   },
 ];
 
@@ -82,8 +97,8 @@ const routesAdmin = [
   },
   {
     exact: true,
-    path: "/catalog-management",
-    component: lazy(() => import("containers/AdminTemplate/CatalogManagementPage"))
+    path: "/seller-management",
+    component: lazy(() => import("containers/AdminTemplate/SellerManagementPage"))
   },
 ];
 

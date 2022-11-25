@@ -54,13 +54,14 @@ export default function NavbarHome() {
       )
     } else {
       return (
-        <>
+        <><div className="collapse navbar-collapse" id="navbarNav">
           <li className="nav-item">
-            <Link className="nav-link" to="/login" >Login</Link>
+            <Link className="nav-link" to="/login" >Đăng nhập</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link btn btn-primary text-white px-3 ml-1 btn-join" to="/signup" >Join</Link>
+            <Link className="nav-link btn btn-primary text-white px-3 ml-1 btn-join" to="/signup" >Đăng ký</Link>
           </li>
+          </div>
         </>
       )
     }
@@ -140,7 +141,7 @@ export default function NavbarHome() {
                   <Link className="nav-link" to="/shop-art" >Cửa hàng</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/cart" >Giỏ hàng</Link>
+                  <Link className="nav-link" to="/cart/2" >Giỏ hàng</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/be-seller" >Trở thành người bán</Link>
@@ -157,5 +158,3 @@ export default function NavbarHome() {
     </div>
   )
 }
-
-

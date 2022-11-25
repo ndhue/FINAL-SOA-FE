@@ -44,9 +44,9 @@ export default function UsersManagementPage() {
           <td>{user.role}</td>
           <td>
             <button className='btn btn-edit mx-1' data-toggle="modal" data-target="#addModal" onClick={() => {
-              setMethod("EDIT");
+              setMethod("Chỉnh sửa");
               setUserEdit(user)
-            }}>Edit</button>
+            }}>Chỉnh sửa</button>
             <button className='btn btn-del mx-1' onClick={() => { handleDeleteUser(user.user_id) }
             }>×</button>
           </td>
@@ -90,7 +90,7 @@ export default function UsersManagementPage() {
 
   return (
     <div>
-      <h5 className='text-center my-3 user-title'>USERS MANAGEMENT</h5>
+      <h5 className='text-center my-3 user-title'>QUẢN LÝ NGƯỜI DÙNG</h5>
       <div className='d-flex justify-content-between mx-5'>
         <form className="form-inline my-2 my-lg-0" onSubmit={(e) => {
           e.preventDefault();
@@ -98,19 +98,19 @@ export default function UsersManagementPage() {
         }}>
           <div className="form-group">
             <select className="form-control" onChange={(e) => { setSearchType(e.target.value) }}>
-              <option>All</option>
-              <option value="name">By Name</option>
-              <option value="email">By Email</option>
-              <option value="role">By Role</option>
+              <option>Tất cả</option>
+              <option value="name">Theo Tên</option>
+              <option value="email">Theo Email</option>
+              <option value="role">Theo Role</option>
             </select>
           </div>
-          <input className="form-control m-0 mx-2" type="search" placeholder="Find User" aria-label="Search" ref={searchInput} />
-          <button className="btn m-0 btn-search" type="submit">Search</button>
+          <input className="form-control m-0 mx-2" type="search" placeholder="Tìm kiếm" aria-label="Search" ref={searchInput} />
+          <button className="btn m-0 btn-search" type="submit">Tìm kiếm</button>
         </form>
         <button className="btn btn-add-user" data-toggle="modal" data-target="#addModal" onClick={() => {
-          setMethod("ADD");
+          setMethod("Thêm");
           setUserEdit(null)
-        }}> + Add User</button>
+        }}> + Thêm người dùng</button>
       </div>
       <AdminModal method={method} userEdit={userEdit} />
 
@@ -118,10 +118,10 @@ export default function UsersManagementPage() {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Tên</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col">Manage</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>

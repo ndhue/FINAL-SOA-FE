@@ -2,8 +2,10 @@ import * as ActionTypes from './constants';
 
 const initialState = {
   data: null,
+  listProduct: null,
   loading: false,
   error: null,
+  total: 0,
 
   deletionLoading: false,
   deletionError: null
@@ -11,7 +13,6 @@ const initialState = {
 
 const cartManagementReducer = (state = initialState, action) => {
   const payload = action.payload;
-
   switch (action.type) {
     case ActionTypes.CART_MANAGEMENT_REQUEST: {
       state.data = null;
@@ -31,7 +32,36 @@ const cartManagementReducer = (state = initialState, action) => {
       state.error = payload.response.data.message;
       return { ...state };
     }
-
+    case ActionTypes.PRODUCTS_MANAGEMENT_REQUEST: {
+      state.listProduct = null;
+      state.loading = true;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionTypes.PRODUCTS_MANAGEMENT_SUCCESS: {
+      const list = [];
+      let t = 0;
+      for(let i=0; i<state.data.length; i++){
+        for(let j=0; j<payload.length; j++){
+          if(state.data[i].product_id === payload[j].product_id){
+            list.push(payload[j]);
+            t +=parseInt(payload[j].price);
+          }
+        }
+      }
+      state.listProduct = list;
+      state.loading = false;
+      state.error = null;
+      state.total = t;
+      return { ...state};
+    }
+    case ActionTypes.PRODUCTS_MANAGEMENT_FAILED: {
+      state.listProduct = null;
+      state.loading = false;
+      state.error = payload.response.data.message;
+      state.total = 0;
+      return { ...state };
+    }
     default:
       return { ...state };
   }

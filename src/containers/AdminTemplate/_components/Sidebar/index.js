@@ -15,26 +15,23 @@ export default function AdminSidebar() {
 
   return (
     <div className="sidebar">
-      <h5 className='text-center pt-3 dashboard'>Dashboard</h5>
+      <h5 className='text-center pt-3 dashboard'>Bảng điều khiển</h5>
       <ul className="nav flex-column">
         <li className="nav-item">
-          <Link className="nav-link" to="/">Homepage</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/user-page">Admin Info</Link>
+          <Link className="nav-link" to="/">Trang chủ</Link>
         </li>
         <div className='my-4'>
           <li className="nav-item">
-            <NavLink activeClassName='sidebar-active' className="nav-link" to="/users-management">Users Management</NavLink>
+            <NavLink activeClassName='sidebar-active' className="nav-link" to="/users-management">Quản lý nhân viên</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName='sidebar-active' className="nav-link" to="/products-management">Products Management</NavLink>
+            <NavLink activeClassName='sidebar-active' className="nav-link" to="/products-management">Quản lý sản phẩm</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName='sidebar-active' className="nav-link" to="/catalog-management">Catalog Management</NavLink>
+            <NavLink activeClassName='sidebar-active' className="nav-link" to="/seller-management">Seller Management</NavLink>
           </li>
         </div>
-        <button className="btn btn-log-out" onClick={handleLogout}>Logout</button>
+        <button className="btn btn-log-out" onClick={handleLogout}>Đăng xuất</button>
       </ul>
     </div>
   )

@@ -1,34 +1,46 @@
 import React, { useEffect,  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { actFetchCartData } from './modules/actions';
+import { actFetchCartData, actFetchProductsData } from './modules/actions';
 import './style.css';
-export default function CartPage() {
+import VND from 'components/CurrencyFormat';
+export default function CartPage(props) {
   
   const dispatch = useDispatch();
-
+  const userId = props.match.params.id;
   const data = useSelector(state => state.cartManagementReducer.data);
   const [cartData, setCartData] = useState(null);
 
+  const Pdata = useSelector(state => state.cartManagementReducer.listProduct);
+  const [productsData, setProductsData] = useState(null);
+
+  const total = VND.format(useSelector(state => state.cartManagementReducer.total));
+  
   useEffect(() => {
-    dispatch(actFetchCartData());
+    dispatch(actFetchCartData(userId));
+    dispatch(actFetchProductsData());
   }, []);
 
   useEffect(() => {
     setCartData(data);
   }, [data]);
 
+  useEffect(() => {
+    setProductsData(Pdata);
+  }, [Pdata]);
   const handleRenderTable = () => {
-    return cartData?.map((product) => {
+    return productsData?.map((product,index) => {
       return (
-        <tr className="border-top" key={product.product_id}>
+        <tr className="border-top" key={index+1}>
             <td>
                 <div className="cart_product_thumb">
-                  {product.product_name}
+                {product.product_id}
                 </div>
             </td>
+            <td>{product.product_name}</td>
+            <td><div className='product-cover'>
+            <img className="product-image" src={`http://localhost:9090/file/`+`${product.product_image}`} alt='for sale' /></div>
+          </td>
             <td></td>
-            <td></td>
-            <td className="product_quantity"></td>
             <td>
                 <div className="cart_product_price">
                     <span>{product.price}</span>
@@ -39,7 +51,6 @@ export default function CartPage() {
                     <a href="#"><i className="ion-android-close"></i></a>
                     </div>
             </td>
-
         </tr>
       )
     })
@@ -65,7 +76,7 @@ export default function CartPage() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {handleRenderTable}
+                                        {handleRenderTable()}
                                     </tbody>
                                 </table>
                             </div>
@@ -86,15 +97,15 @@ export default function CartPage() {
                                <div className="grand_totall_inner border-bottom">
                                    <div className="cart_subtotal d-flex justify-content-between">
                                        <p>Tổng </p>
-                                       <span>$126.00</span>
+                                       <span>{total}</span>
                                    </div>
                                    <div className="cart_grandtotal d-flex justify-content-between">
                                        <p>Tổng cộng</p>
-                                       <span>$126.00</span>
+                                       <span>{total}</span>
                                    </div>
                                </div>
                                <div className="proceed_checkout_btn">
-                                   <a className="btn btn-primary" href="#">Thanh toán</a>
+                                   <a className="btn btn-primary" href="/pay">Thanh toán</a>
                                </div>
                                
                             </div>

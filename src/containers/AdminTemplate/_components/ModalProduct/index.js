@@ -1,4 +1,3 @@
-import { EventBusy } from "@mui/icons-material";
 import Loading from "components/Loading";
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -199,6 +198,22 @@ export default function AdminModalProduct(props) {
                   className="form-control"
                   type="text"
                   name="product_name"
+                  placeholder="Tên sản phẩm"
+                  onChange={handleOnchange}
+                  value={state.product_name}
+                  onBlur={handleErrors}
+                />
+                {valid.errors.product_name && (
+                  <div className="alert alert-danger mt-2">
+                    {valid.errors.product_name}
+                  </div>
+                )}
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="text"
+                  name="product_name"
                   placeholder="Name"
                   onChange={handleOnchange}
                   value={state.product_name}
@@ -215,7 +230,7 @@ export default function AdminModalProduct(props) {
                   className="form-control"
                   type="text"
                   name="description"
-                  placeholder="Description"
+                  placeholder="Mô tả"
                   onChange={handleOnchange}
                   value={state.description}
                   onBlur={handleErrors}
@@ -231,7 +246,7 @@ export default function AdminModalProduct(props) {
                   className="form-control"
                   type="number"
                   name="price"
-                  placeholder="Price"
+                  placeholder="Giá"
                   onChange={handleOnchange}
                   value={state.price}
                   onBlur={handleErrors}
@@ -250,7 +265,7 @@ export default function AdminModalProduct(props) {
                 onChange={e => setState({ ...state, [e.target.name]: fileInput.current.files[0] })}/>
               </div>
               {/* <div className="form-group">
-                <img alt="not fount" width={"100px"} height={'100%'} object-fit={'contain'} src={URL.createObjectURL(fileInput)} />
+                <img alt="not fount" width={"100px"} height={'100%'} object-fit={'contain'} src={`http://localhost:9090/file/`+`${fileInput}`} />
               </div> */}
               <div className="form-group text-center mt-3">
                 <button className="btn btn-success px-3" type="submit" >
