@@ -10,7 +10,7 @@ export default function ProductsManagementPage() {
   const dispatch = useDispatch();
   const [method, setMethod] = useState("");
   const [productEdit, setProductEdit] = useState(null);
-
+  const [productStatus, setProductStatus] = useState(null);
   const data = useSelector(state => state.productsManagementReducerByAdmin.data);
   const [productsData, setProductsData] = useState(null);
 
@@ -24,29 +24,34 @@ export default function ProductsManagementPage() {
     setProductsData(data);
   }, [data]);
 
-  const refresh = () => {
-    window.location.reload();
-  }
-
   const handleDeleteProduct = id => {
-    if (window.confirm("Delete?")) {
+    if (window.confirm("Bạn muốn xóa sản phẩm?")) {
       dispatch(actDeleteProduct(id));
-      refresh();
+      window.location.reload();
     }
   }
 
-  const checkStatus = status =>{
+  const checkStatus = (status, product) =>{
     if(status === "Chờ duyệt")
       return (
-        <button className='btn btn-check'>
-          Chờ duyệt
-        </button>
+        <button className='btn btn-edit mx-1' data-toggle="modal" data-target="#addModal" onClick={() => {
+          setMethod("Duyệt");
+          setProductEdit(product);
+          setProductStatus("Còn hàng")
+        }}>Chờ duyệt</button>
       )
-    else return (
+    else if(status === "Còn hàng"){ 
+      return(
       <button className='btn btn-success' disabled>
-          Còn hàng
+          Đã duyệt
         </button>
-    )
+    )}
+    else if(status === "Hết hàng"){ 
+      return(
+      <button className='btn btn-success' disabled>
+          Hết hàng
+        </button>
+    )}
   }
 
   const handleRenderTable = () => {
@@ -59,11 +64,12 @@ export default function ProductsManagementPage() {
             <img className="product-image" src={`http://localhost:9090/file/`+`${product.product_image}`} alt='for sale' /></div>
           </td>
           <td>{VND.format(product.price)}</td>
-          <td>{checkStatus(`${product.status}`)}</td>
+          <td>{checkStatus(`${product.status}`,product)}</td>
           <td>
             <button className='btn btn-edit mx-1' data-toggle="modal" data-target="#addModal" onClick={() => {
               setMethod("Chỉnh sửa");
-              setProductEdit(product)
+              setProductEdit(product);
+              setProductStatus("Chờ duyệt")
             }}>Chỉnh sửa</button>
             <button className='btn btn-del mx-1' onClick={() => { handleDeleteProduct(product.product_id) }
             }>×</button>
@@ -117,19 +123,23 @@ export default function ProductsManagementPage() {
           <input className="form-control m-0 mx-2" type="search" placeholder="Tìm kiếm" aria-label="Search" ref={searchInput} />
           <button className="btn m-0 btn-search" type="submit">Tìm kiếm</button>
         </form>
-        <button className="btn btn-add-user" data-toggle="modal" data-target="#addModal" onClick={() => {
-          setMethod("Thêm");
-          setProductEdit(null)
-        }}> + Thêm sản phẩm</button>
+        <button className="btn btn-primary" onClick={()=>{
+          const searchingData = productsData.filter(product => {
+            if (product.status) {
+              return removeVietnameseTones(product.status.toLowerCase()).indexOf(removeVietnameseTones("Chờ duyệt").toLowerCase()) >= 0
+            }
+          });
+          return setProductsData(searchingData);
+        }}> Duyệt sản phẩm</button>
       </div>
-      <AdminModalProduct method={method} productEdit={productEdit} />
+      <AdminModalProduct method={method} productEdit={productEdit} productStatus={productStatus}/>
 
       <table className="table table-striped mt-5 text-center">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên</th>
-            <th scope="col">Hình ản</th>
+            <th scope="col">Hình ảnh</th>
             <th scope="col">Giá</th>
             <th scope="col">Trạng thái</th>
             <th scope="col"></th>

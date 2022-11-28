@@ -1,65 +1,61 @@
 import './style.css';
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { actFetchJobTypes } from './modules/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import React, { useRef, useState } from 'react';
+import { Link} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import logo from './img/logo.png';
 export default function NavbarHome() {
+  const userId = localStorage.getItem("UserInfo") ? JSON.parse(localStorage.getItem("UserInfo")).user_id : 0;
+  const linkToInfo = `/user-info/${userId}`;
+  const linkToCart = `/cart/${userId}`;
   const history = useHistory();
-  const searchInput = useRef(null);
   const [isLogin, setIsLogin] = useState(localStorage.getItem("UserInfo") ? true : false);
-  const dispatch = useDispatch();
 
   const selectALl = items => { return document.querySelectorAll(items) };
   const select = dom => { return document.querySelector(dom) }
 
-  useEffect(() => {
-    dispatch(actFetchJobTypes());
-  }, []);
-
-
-  const handleOnChange = (e) => {
-    localStorage.setItem("job-keyword", JSON.stringify(e.target.value.trim()));
-  }
 
   const handleRenderLoginSpace = () => {
-    if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).user.role === "Admin") {
+    if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).role === "Admin") {
       return (
         <>
-          <Link className="nav-link m-1 btn-join m-auto px-3" style={{ cursor: "pointer" }} onClick={() => {
-            if (window.confirm("Logout?")) {
+          <li className='nav-item mx-2'>
+          <Link className="nav-link btn btn-primary" style={{ cursor: "pointer" }} onClick={() => {
+            if (window.confirm("Đăng xuất?")) {
               localStorage.removeItem("UserInfo");
               setIsLogin(false);
             }
-          }}>Logout</Link>
+          }}>Đăng xuất</Link>
+          </li>
           <li className="nav-item">
-            <Link className="nav-link btn btn-join text-white ml-1" to="/users-management">Dashboard</Link>
+            <Link className="nav-link btn btn-primary" to="/users-management">Bảng điều khiển</Link>
           </li>
         </>
       )
-    } else if (localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).user.role === "Customer") {
+    } else if (localStorage.getItem("UserInfo") && (JSON.parse(localStorage.getItem("UserInfo")).role === "Customer" || JSON.parse(localStorage.getItem("UserInfo")).role === "Seller")) {
       return (
         <>
-          <li className="nav-item">
-            <Link className="nav-link" to="/user-page" >User Info</Link>
+          <li className="nav-item mx-2">
+            <a className="nav-link btn btn-primary" href={linkToInfo} >Trang cá nhân</a>
           </li>
-          <Link className="nav-link px-1" style={{ cursor: "pointer" }} onClick={() => {
-            if (window.confirm("Logout?")) {
+          <li className='nav-item'>
+          <a className="nav-link btn btn-primary text-white px-3 ml-1" style={{ cursor: "pointer" }} onClick={() => {
+            if (window.confirm("Xác nhận đăng xuất?")) {
               localStorage.removeItem("UserInfo");
               setIsLogin(false);
+              history.push('/')
             }
-          }}>Logout</Link>
+          }}>Đăng xuất</a>
+          </li>
         </>
       )
     } else {
       return (
         <><div className="collapse navbar-collapse" id="navbarNav">
           <li className="nav-item">
-            <Link className="nav-link" to="/login" >Đăng nhập</Link>
+            <a className="nav-link" href="/login" >Đăng nhập</a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link btn btn-primary text-white px-3 ml-1 btn-join" to="/signup" >Đăng ký</Link>
+            <a className="nav-link btn btn-primary text-white px-3 ml-1 btn-join" href="/signup" >Đăng ký</a>
           </li>
           </div>
         </>
@@ -114,19 +110,25 @@ export default function NavbarHome() {
     document.documentElement.scrollTo({ top: 0 });
   };
 
+  const handleForm = () =>{
+    if(localStorage.getItem("UserInfo") && JSON.parse(localStorage.getItem("UserInfo")).role === "Customer"){
+    return(
+      <li className="nav-item">
+          <a className="nav-link" href="/be-seller" >Trở thành người bán</a>
+      </li>
+    )}
+  }
+
   return (
     <div id='navbar-home'>
       <div className='container'>
         <nav className="navbar navbar-expand-lg nav-top">
           <div className='d-flex'>
-            <NavLink className="navbar-brand" to="/">
+            <a className="navbar-brand" href="/">
                 <img src={logo} alt="logo" />
                 <h3 className='font-weight-bold'>DIGITAL ART</h3>
-            </NavLink>
-            <form className="form-inline my-2 my-lg-0 navbar-search">
-              <input className="form-control mr-sm-2" style={{ minWidth: 200 }} type="search" placeholder={localStorage.getItem("job-keyword") ? JSON.parse(localStorage.getItem("job-keyword")) : "Find Services"} aria-label="Search" onChange={handleOnChange} ref={searchInput} />
-              <button className="btn btn-outline-success" type='submit'>Search</button>
-            </form>
+            </a>
+            
           </div>
           <div className='d-flex'>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,17 +137,15 @@ export default function NavbarHome() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/" >Trang chủ</NavLink>
+                  <a className="nav-link" href="/" >Trang chủ</a>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/shop-art" >Cửa hàng</Link>
+                  <a className="nav-link" href="/shop-art" >Cửa hàng</a>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/cart/2" >Giỏ hàng</Link>
+                  <a className="nav-link" href={linkToCart} >Giỏ hàng</a>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/be-seller" >Trở thành người bán</Link>
-                </li>
+                {handleForm()}
               </ul>
             </div>
             <ul className="navbar-nav mr-auto">

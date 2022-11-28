@@ -3,8 +3,14 @@ nav {
   padding: 8px 0 !important;
   justify-content: space-between !important;
 }
+.navbar-brand{
+  transition: .3s;
+}
+.navbar-brand:hover{
+  color: #0056b3
+}
 nav a {
-  color: #212529;
+  color: #677583;
 }
 .nav-active {
   color: #0056b3;
@@ -68,7 +74,7 @@ nav a {
   transition: .5s;
 }
 .nav-link:hover{
-  background-color: #497282;
+  background-color: #5e72e4;
   border-radius: 5px;
   color: #fff;
 }

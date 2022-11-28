@@ -6,7 +6,9 @@ export const actFetchProductsData = () => {
     dispatch(actManageProductsRequest());
     api.get("/products")
       .then(result => {
-        dispatch(actManageProductsSuccess(result.data));
+        const uncheckedProduct = result.data.filter(p => p.status === "Chờ duyệt");
+        const checkedProduct = result.data.filter(p => p.status !== "Chờ duyệt");
+        dispatch(actManageProductsSuccess(uncheckedProduct.concat(checkedProduct)));
       })
       .catch(error => {
         dispatch(actManageProductsFailed(error));

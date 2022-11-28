@@ -2,6 +2,7 @@ import * as ActionTypes from './constants';
 
 const initialState = {
   data: null,
+  product: null,
   loading: false,
   error: null,
 
@@ -31,6 +32,7 @@ const productsManagementReducer = (state = initialState, action) => {
       state.error = payload.response.data.message;
       return { ...state };
     }
+
 
     default:
       return { ...state };

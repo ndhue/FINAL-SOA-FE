@@ -7,6 +7,7 @@ import PageNotFound from "containers/PageNotFound";
 import { renderRoutesAdmin, renderRoutesHome, renderRoutesUser } from "routes";
 
 function App() {
+  
   return (
     <Suspense fallback={<Loading />}>
       <BrowserRouter>

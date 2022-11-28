@@ -26,7 +26,7 @@ export default function LoginPage(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(actLogin(info, props.history));
+    dispatch(actLogin(info.username, info.password, props.history));
   };
 
   const handleOnChange = e => {
@@ -56,7 +56,7 @@ export default function LoginPage(props) {
           <div className="sub-main-w3ls">	
             <form onSubmit={handleSubmit}>
               <input placeholder="Nhập tài khoản" name="username" type="text" required onChange={handleOnChange} />
-              <input placeholder="Nhập mật khẩu" name="Password" type="password" required onChange={handleOnChange}/>
+              <input placeholder="Nhập mật khẩu" name="password" type="password" required onChange={handleOnChange}/>
               <div className="checkbox-w3">
                 <div className='text-center mt-3'>
                   <a href="/signup" className='p-3'>Đăng ký</a>

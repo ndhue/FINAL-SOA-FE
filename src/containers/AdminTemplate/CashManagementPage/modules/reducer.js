@@ -1,40 +1,40 @@
 import * as ActionTypes from './constants';
 
 const initialState = {
-  keyword: null,
   data: null,
   loading: false,
   error: null,
+
+  deletionLoading: false,
+  deletionError: null
 }
 
-const searchingReducer = (state = initialState, action) => {
+const transactionsManagementReducer = (state = initialState, action) => {
   const payload = action.payload;
 
   switch (action.type) {
-    case ActionTypes.SEARCHING_REQUEST: {
-      state.keyword = null;
+    case ActionTypes.TRANSACTIONS_MANAGEMENT_REQUEST: {
       state.data = null;
       state.loading = true;
       state.error = null;
       return { ...state };
     }
-    case ActionTypes.SEARCHING_SUCCESS: {
-      state.keyword = payload.keyword;
-      state.data = payload.data;
+    case ActionTypes.TRANSACTIONS_MANAGEMENT_SUCCESS: {
+      state.data = payload;
       state.loading = false;
       state.error = null;
       return { ...state };
     }
-    case ActionTypes.SEARCHING_FAILED: {
-      state.keyword = null;
+    case ActionTypes.TRANSACTIONS_MANAGEMENT_FAILED: {
       state.data = null;
       state.loading = false;
       state.error = payload.response.data.message;
       return { ...state };
     }
+
     default:
       return { ...state };
   }
 }
 
-export default searchingReducer;
+export default transactionsManagementReducer;

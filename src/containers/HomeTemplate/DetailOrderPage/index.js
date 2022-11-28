@@ -1,9 +1,23 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import './style.css'
+import React, { useEffect,  useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { actFetchUsersDataByID } from '../PersonInfoPage/modules/actions';
+import './style.css';
+import VND from 'components/CurrencyFormat';
 export default function DetailOrderPage() {
+  const dispatch = useDispatch();
+  const userId = localStorage.getItem("UserInfo") ? JSON.parse(localStorage.getItem("UserInfo")).user_id : 0;
 
+  const data = useSelector(state => state.usersInfoManagementReducer.data);
+  const [userInfo, setUserInfo] = useState('');
+  useEffect(() => {
+    dispatch(actFetchUsersDataByID(userId));
+  }, []);
+  
+  useEffect(() => {
+    setUserInfo(data);
+  }, [data]);
 
+  if(userInfo){
   return (
     <div>
       <h3 className='text-center my-3 user-title'>Chi tiết đơn hàng</h3>
@@ -20,20 +34,20 @@ export default function DetailOrderPage() {
             <h3>Thông tin thanh toán</h3>
            
             <div className="checkout_form_input">
-              <label>Họ và tên <span>*</span></label>
-              <input type="text" />
+              <label>Họ và tên</label>
+              <input type="text" value={userInfo.fullname} disabled/>
             </div>    
             <div className="checkout_form_input">
-              <label>Address  <span>*</span></label>
-              <input type="text" />
+              <label>Địa chỉ</label>
+              <input type="text" value={userInfo.address} disabled/>
             </div>
             <div className="checkout_form_input">
-              <label> Email Address   <span>*</span></label>
-              <input type="text" />
+              <label> Email</label>
+              <input type="text" value={userInfo.email} disabled/>
             </div>
             <div className="checkout_form_input">
-              <label> Phone <span>*</span></label>
-              <input type="text" />
+              <label> Phone</label>
+              <input type="text" value={userInfo.phone} disabled/>
             </div>
             <div className="checkout_form_input">
               <label> Trạng thái <span>*</span></label>
@@ -85,8 +99,6 @@ export default function DetailOrderPage() {
     </div>
   </div>
 </div>
-
-  
     </div>
   )
-}
+}}

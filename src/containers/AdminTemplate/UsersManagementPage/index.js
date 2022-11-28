@@ -24,16 +24,12 @@ export default function UsersManagementPage() {
   }, [data]);
 
   const handleDeleteUser = id => {
-    if (window.confirm("Delete?")) {
+    if (window.confirm("Bạn muốn xóa người dùng này?")) {
       dispatch(actDeleteUser(id));
-      refresh();
+      window.location.reload();
     }
   }
-
-  const refresh = () => {
-    window.location.reload();
-  }
-
+  
   const handleRenderTable = () => {
     return usersData?.map((user, index) => {
       return (

@@ -134,7 +134,7 @@ p.agileits2 {
     float: left;
     padding: 15px 0 0;
 }
-input#fullname,input#email,input#password1,input#password2, input#phone, select#role, select#gender, input#address, input#username {
+input#fullname,input#email,input#password1,input#password2, input#phone, select#role, select#gender, input#address, input#username, input#storename {
 	width:300px;
 	height:40px;
 	padding:0 15px;
@@ -152,7 +152,7 @@ input#fullname,input#email,input#password1,input#password2, input#phone, select#
 	display:block;
 	outline:none;
 }
-input#fullname:focus,input#email:focus,input#password1:focus,input#password2:focus, input#phone:focus, select#role:focus, select#gender:focus, input#address:focus, input#username:focus, input#fullname:hover,input#email:hover,input#password1:hover,input#password2:hover, input#phone:hover, select#role:hover, input#address:hover, input#username:hover {
+input#fullname:focus,input#email:focus,input#password1:focus,input#password2:focus, input#phone:focus, select#role:focus, select#gender:focus, input#address:focus, input#username:focus, input#fullname:hover,input#email:hover,input#password1:hover,input#password2:hover, input#phone:hover, select#role:hover, input#address:hover, input#username:hover, input#storename:hover {
 	color:#fff;
 	border-bottom:5px solid #3970b0;
 }
@@ -162,27 +162,9 @@ select#gender{
 }
 input::-webkit-input-placeholder {
 color: #fff !important;
-} 
-input:-moz-placeholder { /* Firefox 18- */
-color: #fff !important;  
-} 
-input::-moz-placeholder {  /* Firefox 19+ */
-color: #fff !important;  
-} 
-input:-ms-input-placeholder {  
-color: #fff !important;  
 }
 input:hover::-webkit-input-placeholder {
 color: #3970b0 !important;
-} 
-input:hover:-moz-placeholder { /* Firefox 18- */
-color:	#3970b0 !important;  
-} 
-input:hover::-moz-placeholder {  /* Firefox 19+ */
-color: #3970b0 !important;  
-} 
-input:hover:-ms-input-placeholder {  
-color: #3970b0 !important;  
 }
 button.register {
 	border-radius: 5px;
@@ -241,7 +223,7 @@ p.copyright {
 p.wthree {
     font-size: 14px;
 }
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#password1, input#password2, input#storename {
 	font-size:15px;
 }
 }
@@ -263,10 +245,10 @@ h2.agileits1 {
 }
 
 @media (max-width: 800px) {
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#password1, input#password2, input#storename {
     width: 260px;
 }
-input.register {
+input.register, input#storename {
     width: 295px;
 }
 p.agileits2 {
@@ -331,11 +313,11 @@ h1.w3ls {
 }
 
 @media (max-width: 384px) {
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#password1, input#password2, input#storename {
     width: 230px;
 	height: 40px;
 }
-input.register {
+input.register, input#storename {
     width: 260px;
 	height:45px;
 }
@@ -378,7 +360,7 @@ h2.agileits1 {
 p.agileits2 {
     font-size: 13px;
 }
-input#firstname, input#email, input#password1, input#password2 {
+input#firstname, input#email, input#password1, input#password2, input#storename {
     width: 195px;
     height: 40px;
 	font-size: 14px;
@@ -387,7 +369,7 @@ input#firstname, input#email, input#password1, input#password2 {
     width: 90%;
     margin: 0 auto;
 }
-input.register {
+input.register, input#storename {
     width: 230px;
     height: 40px;
 	font-size:15px;

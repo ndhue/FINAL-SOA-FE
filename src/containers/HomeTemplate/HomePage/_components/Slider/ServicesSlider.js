@@ -26,10 +26,12 @@ export default function HomeServicesSlider() {
     slidesToShow: 5,
     slidesToScroll: 1,
     speed: 500,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
 
   const handleRenderSlider = () => {
-    return productsData?.map((slide, index) => {
+    return productsData?.filter(product => product.status == 'Còn hàng')?.map((slide, index) => {
       return (
         <div key={index} className='position-relative slider-item'>
           <a href={`/detail/`+`${slide.product_id}`}>

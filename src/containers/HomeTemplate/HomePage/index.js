@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import HomeCarousel from '../_components/Carousel';
 import HomeServicesSlider from './_components/Slider/ServicesSlider';
 import './style.css';

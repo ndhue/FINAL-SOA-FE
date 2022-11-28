@@ -2,6 +2,7 @@ import * as ActionTypes from './constants';
 
 const initialState = {
   productData: null,
+  product: null,
   loading: false,
   error: null,
 }
@@ -26,6 +27,24 @@ const productDetailReducer = (state = initialState, action) => {
       state.productData = null;
       state.loading = false;
       state.error = payload.response.data.message;
+      return { ...state };
+    }
+    case ActionTypes.CART_MANAGEMENT_REQUEST: {
+      state.product = null;
+      state.loading = true;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionTypes.CART_MANAGEMENT_SUCCESS: {
+      state.product = payload;
+      state.loading = false;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionTypes.CART_MANAGEMENT_FAILED: {
+      state.product = null;
+      state.loading = false;
+      state.error = payload.response.product.message;
       return { ...state };
     }
     default:

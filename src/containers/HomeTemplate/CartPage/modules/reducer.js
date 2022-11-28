@@ -55,11 +55,29 @@ const cartManagementReducer = (state = initialState, action) => {
       state.total = t;
       return { ...state};
     }
+    
     case ActionTypes.PRODUCTS_MANAGEMENT_FAILED: {
       state.listProduct = null;
       state.loading = false;
-      state.error = payload.response.data.message;
+      state.error = payload.response.listProduct.message;
       state.total = 0;
+      return { ...state };
+    }
+
+    case ActionTypes.PRODUCTS_DELETE_REQUEST: {
+      state.deletionLoading = true;
+      state.deletionError = null;
+      return { ...state };
+    }
+    case ActionTypes.PRODUCTS_DELETE_SUCCESS: {
+      state.deletionLoading = false;
+      state.deletionError = null;
+      return { ...state };
+    }
+    case ActionTypes.PRODUCTS_DELETE_FAILED: {
+      state.deletionLoading = false;
+      state.deletionError = payload.response.data;
+      alert(payload.response.data)
       return { ...state };
     }
     default:

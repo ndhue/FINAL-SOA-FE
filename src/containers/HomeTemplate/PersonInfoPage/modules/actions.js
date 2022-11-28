@@ -28,6 +28,19 @@ const actEditUsersDataByID = (info, method, id) => {
   }
 }
 
+const actFetchOrderDataByID = id => {
+  return dispatch => {
+    dispatch(actOrderDataRequest());
+    api.get(`/users/${id}`)
+      .then(result => {
+        dispatch(actOrderDataSuccess(result.data));
+      })
+      .catch(error => {
+        dispatch(actOrderDataFailed(error));
+      });
+  }
+}
+
 const actUserInfoRequest = () => {
   return {
     type: ActionTypes.USER_INFO_REQUEST,
@@ -55,4 +68,22 @@ const actUserInfoEditFailed = error => ({
   payload: error
 });
 
-export { actFetchUsersDataByID, actEditUsersDataByID };
+const actOrderDataRequest = () => {
+  return {
+    type: ActionTypes.USER_INFO_REQUEST,
+  }
+};
+const actOrderDataSuccess = data => {
+  return {
+    type: ActionTypes.USER_INFO_SUCCESS,
+    payload: data
+  }
+};
+const actOrderDataFailed = error => {
+  return {
+    type: ActionTypes.USER_INFO_FAILED,
+    payload: error
+  }
+};
+
+export { actFetchUsersDataByID, actEditUsersDataByID, actFetchOrderDataByID };

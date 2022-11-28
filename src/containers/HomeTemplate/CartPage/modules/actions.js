@@ -63,3 +63,35 @@ const actManageProductsFailed = error => {
     payload: error
   }
 };
+
+export const actDeleteProductCart = (user_id, product_id) => {
+  console.log(user_id, product_id);
+  return (dispatch) => {
+    dispatch(actDeleteProductRequest());
+    api.delete(`/carts/${user_id}/${product_id}`)
+      .then(result => {
+        dispatch(actDeleteProductSuccess());
+        alert("Deleted successfully! Refresh & change.")
+      })
+      .catch(error => {
+        dispatch(actDeleteProductFailed(error));
+      });
+  }
+}
+const actDeleteProductRequest = () => {
+  return {
+    type: ActionType.PRODUCTS_DELETE_REQUEST,
+  }
+};
+const actDeleteProductSuccess = data => {
+  return {
+    type: ActionType.PRODUCTS_DELETE_SUCCESS,
+    payload: data
+  }
+};
+const actDeleteProductFailed = error => {
+  return {
+    type: ActionType.PRODUCTS_DELETE_FAILED,
+    payload: error
+  }
+};

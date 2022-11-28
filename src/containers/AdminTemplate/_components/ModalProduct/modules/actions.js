@@ -3,24 +3,33 @@ import * as ActionTypes from './constants';
 
 export const actManageProducts = (info, method, id) => {
   const data = new FormData();
+  data.append('seller_id', info.seller_id);
   data.append('product_image', info.product_image);
   data.append('product_name', info.product_name);
   data.append('description', info.description);
   data.append('price', info.price);
+  data.append('status', info.status);
+  console.log(info);
   return dispatch => {
     dispatch(actModalProductRequest());
-    if (method == "ADD") {
+    if (method == "Thêm") {
       api.post("/products/",data, {headers: { "Content-Type": "multipart/form-data"}})
         .then(result => {
           dispatch(actModalProductAddSuccess(result.data));
-          console.log(result);
         })
         .catch(error => {
           dispatch(actModalProductAddFailed(error));
-          console.log(error);
         });
-    } else if (method == "EDIT") {
+    } else if (method == "Chỉnh sửa") {
       api.put(`/products/${id}`, info)
+        .then(result => {
+          dispatch(actModalProductEditSuccess(result.data));
+        })
+        .catch(error => {
+          dispatch(actModalProductEditFailed(error))
+        });
+    } else if (method == "Duyệt"){
+      api.put(`/products/status/${id}`, info)
         .then(result => {
           dispatch(actModalProductEditSuccess(result.data));
         })

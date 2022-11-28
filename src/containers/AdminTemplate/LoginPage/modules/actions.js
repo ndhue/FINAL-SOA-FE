@@ -1,32 +1,34 @@
 import api from 'utils/apiUtils';
 import * as ActionType from './constants';
+const qs = require('qs');
 
-export const actLogin = (userInfo, history) => {
+export const actLogin = (username,password, history) => {
+  const data = qs.stringify({
+    'username': username,
+    'password': password
+  })
   return (dispatch) => {
     dispatch(actLoginRequest());
-
-    api.post("/api/auth/signin", userInfo)
-      .then(result => {
-        if (result.data.user.role === "Customer") {
-          dispatch(actLoginSuccess(result.data));
-          localStorage.setItem("UserInfo", JSON.stringify(result.data));
-          history.goBack();
-        } else if (result.data.user.role == "Admin") {
-          dispatch(actLoginSuccess(result.data));
-          localStorage.setItem("UserInfo", JSON.stringify(result.data));
-          history.replace("/users-management");
-        } else {
-          return Promise.reject({
-            response: {
-              data: {
-                message: "Does not have permission to access!"
-              }
-            }
-          });
-        }
-      })
+    api.post("/login",data, {headers: { 
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }})
+    .then(result => {
+      if (result.data.role === "Customer" || result.data.role === "Seller") {
+        dispatch(actLoginSuccess(result.data));
+        localStorage.setItem("UserInfo", JSON.stringify(result.data));
+        history.push('/');
+        window.location.reload();
+      } else if (result.data.role == "Admin") {
+        dispatch(actLoginSuccess(result.data));
+        localStorage.setItem("UserInfo", JSON.stringify(result.data));
+        history.replace("/users-management");
+        window.location.reload();
+      }
+    })
       .catch(error => {
         dispatch(actLoginFailed(error));
+        alert('Tài khoản hoặc mật khẩu sai!');
+        window.location.reload();
       });
   }
 }

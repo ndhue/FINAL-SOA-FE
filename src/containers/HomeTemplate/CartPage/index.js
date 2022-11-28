@@ -1,6 +1,6 @@
 import React, { useEffect,  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { actFetchCartData, actFetchProductsData } from './modules/actions';
+import { actFetchCartData, actFetchProductsData, actDeleteProductCart } from './modules/actions';
 import './style.css';
 import VND from 'components/CurrencyFormat';
 export default function CartPage(props) {
@@ -12,14 +12,14 @@ export default function CartPage(props) {
 
   const Pdata = useSelector(state => state.cartManagementReducer.listProduct);
   const [productsData, setProductsData] = useState(null);
-
   const total = VND.format(useSelector(state => state.cartManagementReducer.total));
   
+  const linkPay = `/pay/${userId}`;
   useEffect(() => {
     dispatch(actFetchCartData(userId));
     dispatch(actFetchProductsData());
   }, []);
-
+  
   useEffect(() => {
     setCartData(data);
   }, [data]);
@@ -27,29 +27,39 @@ export default function CartPage(props) {
   useEffect(() => {
     setProductsData(Pdata);
   }, [Pdata]);
+
+  const handleDeleteProduct = (user_id, product_id) => {
+    if (window.confirm("Bạn muốn xóa sản phẩm?")) {
+      dispatch(actDeleteProductCart(user_id, product_id));
+      window.location.reload();
+    }
+  }
+  
   const handleRenderTable = () => {
     return productsData?.map((product,index) => {
       return (
-        <tr className="border-top" key={index+1}>
+        <tr className="border-top text-center" key={index+1}>
             <td>
                 <div className="cart_product_thumb">
                 {product.product_id}
                 </div>
             </td>
-            <td>{product.product_name}</td>
+            <td>
+                <div className="cart_product_thumb">
+                {product.product_name}
+                </div>
+            </td>
             <td><div className='product-cover'>
             <img className="product-image" src={`http://localhost:9090/file/`+`${product.product_image}`} alt='for sale' /></div>
-          </td>
+            </td>
             <td></td>
             <td>
                 <div className="cart_product_price">
-                    <span>{product.price}</span>
+                    <span>{VND.format(product.price)}</span>
                 </div>
             </td>
             <td>
-                <div className="cart_product_remove text-right">
-                    <a href="#"><i className="ion-android-close"></i></a>
-                    </div>
+                <button className='btn btn-del mx-1' onClick={() => { handleDeleteProduct(userId, product.product_id) }}>×</button>
             </td>
         </tr>
       )
@@ -67,12 +77,13 @@ export default function CartPage(props) {
                             <div className="cart_page_tabel">
                                 <table>
                                     <thead>
-                                        <tr>
-                                            <th>Sản phẩm </th>
-                                            <th> </th>
-                                            <th></th>
+                                        <tr className='text-center'>
+                                            <th>STT</th>
+                                            <th>Tên</th>
+                                            <th>Hình ảnh</th>
                                             <th></th>
                                             <th>Giá</th>
+                                            <th>Xóa</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,11 +93,10 @@ export default function CartPage(props) {
                             </div>
                             <div className="cart_page_button border-top d-flex justify-content-between">
                                 <div className="shopping_cart_btn">
-                                    <a href="#" className="btn btn-primary border">XÓA GIỎ HÀNG</a>
-                                    <button className="btn btn-primary border" type="submit">CẬP NHẬT GIỎ HÀNG</button>
+                                    
                                 </div>
                                 <div className="shopping_continue_btn">
-                                    <a href="shop.html" className="btn btn-primary">TIẾP TỤC MUA SẮM</a>
+                                    <a href="/shop-art" className="btn btn-primary">TIẾP TỤC MUA SẮM</a>
                                 </div>
                             </div>
                          </div>
@@ -105,18 +115,13 @@ export default function CartPage(props) {
                                    </div>
                                </div>
                                <div className="proceed_checkout_btn">
-                                   <a className="btn btn-primary" href="/pay">Thanh toán</a>
+                                   <a className="btn btn-primary" href={linkPay}>Thanh toán</a>
                                </div>
                                
                             </div>
                         </div>
                     </div>
                 </div>
-               
-        
         </div>
- 
-
-   
   )
 }

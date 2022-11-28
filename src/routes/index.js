@@ -11,16 +11,6 @@ const routesHome = [
   },
   {
     exact: true,
-    path: "/search",
-    component: lazy(() => import("containers/HomeTemplate/SearchingPage"))
-  },
-  {
-    exact: true,
-    path: "/user-page",
-    component: lazy(() => import("containers/HomeTemplate/UserPage"))
-  },
-  {
-    exact: true,
     path: "/shop-art",
     component: lazy(() => import("containers/HomeTemplate/ShopArtPage"))
   },
@@ -41,12 +31,12 @@ const routesHome = [
   },
   {
     exact: true,
-    path: "/pay",
+    path: "/pay/:id",
     component: lazy(() => import("containers/HomeTemplate/PayPage"))
   },
   {
     exact: true,
-    path: "/infopay",
+    path: "/infopay/:id",
     component: lazy(() => import("containers/HomeTemplate/InfoDigitalPay"))
   },
   {
@@ -56,12 +46,12 @@ const routesHome = [
   },
   {
     exact: true,
-    path: "/order",
+    path: "/order/:id",
     component: lazy(() => import("containers/HomeTemplate/OrderPage"))
   },
   {
     exact: true,
-    path: "/detail-order",
+    path: "/detail-order/:id",
     component: lazy(() => import("containers/HomeTemplate/DetailOrderPage"))
   },
 ];
@@ -94,6 +84,11 @@ const routesAdmin = [
     exact: true,
     path: "/seller-management",
     component: lazy(() => import("containers/AdminTemplate/SellerManagementPage"))
+  },
+  {
+    exact: true,
+    path: "/cash-management",
+    component: lazy(() => import("containers/AdminTemplate/CashManagementPage"))
   },
 ];
 

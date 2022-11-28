@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import productDetailReducer from "containers/HomeTemplate/DetailProductPage/modules/reducer";
-import searchingReducer from "containers/HomeTemplate/HomePage/modules/reducer";
+import sellersManagementReducer from "containers/AdminTemplate/SellerManagementPage/modules/reducer";
 import userLoginReducer from "containers/AdminTemplate/LoginPage/modules/reducer";
 import signUpReducer from "containers/AdminTemplate/SignUpPage/modules/reducer";
 import modalReducer from "containers/AdminTemplate/_components/Modal/modules/reducer";
@@ -10,9 +10,12 @@ import productsManagementReducer from "containers/HomeTemplate/ShopArtPage/modul
 import productsManagementReducerByAdmin from "containers/AdminTemplate/ProductsManagementPage/modules/reducer";
 import usersInfoManagementReducer from "containers/HomeTemplate/PersonInfoPage/modules/reducer";
 import cartManagementReducer from "containers/HomeTemplate/CartPage/modules/reducer";
+import paymentReducer from "containers/HomeTemplate/PayPage/modules/reducer";
+import ordersManagementReducer from "containers/HomeTemplate/OrderPage/modules/reducer";
+import transactionsManagementReducer from "containers/AdminTemplate/CashManagementPage/modules/reducer";
 export const rootReducer = combineReducers({
   productDetailReducer,
-  searchingReducer,
+  sellersManagementReducer,
   userLoginReducer,
   signUpReducer,
   modalReducer,
@@ -21,5 +24,8 @@ export const rootReducer = combineReducers({
   productsManagementReducer,
   productsManagementReducerByAdmin,
   usersInfoManagementReducer,
-  cartManagementReducer
+  cartManagementReducer,
+  paymentReducer,
+  ordersManagementReducer,
+  transactionsManagementReducer
 });

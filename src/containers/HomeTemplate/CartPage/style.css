@@ -1,67 +1,14 @@
 #navbarNavShop li{
     margin: 0 20px;
 }
-.product-image{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 .product-cover{
   width: 350px;
 }
-.btn-primary {
-  color: #272727;
-  font-size: 16px;
-  line-height: 45px;
-  height: 45px;
-  padding: 0 20px;
-  background: #6a7964;
-  border-radius: 0;
-  position: relative;
-  z-index: 9;
-  color: #ffffff;
-  border: 0;
-  font-weight: 600;
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .btn-primary {
-    font-size: 14px;
-    line-height: 40px;
-    height: 40px;
-    padding: 0 16px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .btn-primary {
-    font-size: 14px;
-    line-height: 37px;
-    height: 37px;
-    padding: 0 14px;
-  }
-}
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #000000;
-  transform: scaleY(0);
-  transform-origin: 50%;
-  transition-duration: 0.3s;
-}
-.btn-primary:focus {
-  background: #6a7964;
-  border: inherit;
-}
-.btn-primary:hover {
-  background: inherit;
-  border: inherit;
-}
-.btn-primary:hover::before {
-  transform: scaleY(1);
+.product-image{
+  border-radius: 5px;
+  object-fit: contain;
+  height: 300px;
+  width: 300px;
 }
 
 @media only screen and (max-width: 575px) {
@@ -253,10 +200,7 @@
       margin: 0 auto;
     }
   }
-  .cart_page_tabel table tbody tr td:nth-child(2) {
-    padding-left: 37px;
-    display: flex;
-  }
+  
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .cart_page_tabel table tbody tr td:nth-child(2) {
       padding-left: 24px;
@@ -271,9 +215,6 @@
     .cart_page_tabel table tbody tr td:nth-child(2) {
       padding-left: 0;
     }
-  }
-  .cart_page_tabel table tbody tr td:nth-child(3) {
-    width: 100px;
   }
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .cart_page_tabel table tbody tr td:nth-child(3) {
@@ -322,7 +263,7 @@
     }
   }
   .cart_page_tabel table tbody tr td:nth-child(6) {
-    width: 30px;
+    width: 130px;
   }
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .cart_page_tabel table tbody tr td:nth-child(6) {

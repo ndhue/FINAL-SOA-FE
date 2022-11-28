@@ -30,4 +30,3 @@ const actManageProductsFailed = error => {
     payload: error
   }
 };
-

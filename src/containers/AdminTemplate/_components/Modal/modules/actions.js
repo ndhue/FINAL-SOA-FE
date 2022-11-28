@@ -4,7 +4,7 @@ import * as ActionTypes from './constants';
 export const actManageUsers = (info, method, id) => {
   return dispatch => {
     dispatch(actModalRequest());
-    if (method == "ADD") {
+    if (method == "Thêm") {
       api.post("/users/", info)
         .then(result => {
           dispatch(actModalAddSuccess(result.data));
@@ -12,7 +12,7 @@ export const actManageUsers = (info, method, id) => {
         .catch(error => {
           dispatch(actModalAddFailed(error))
         });
-    } else if (method == "EDIT") {
+    } else if (method == "Chỉnh sửa") {
       api.put(`/users/${id}`, info)
         .then(result => {
           dispatch(actModalEditSuccess(result.data));

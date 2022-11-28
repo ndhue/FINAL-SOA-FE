@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actManageUsers, actResetModal } from "./modules/actions";
 
 export default function AdminModal(props) {
-  const { method, userEdit } = props;
+  const { method, userEdit, userId, userStatus } = props;
 
   const message = useSelector((state) => state.modalReducer.message);
   const loading = useSelector((state) => state.modalReducer.loading);
@@ -75,9 +75,12 @@ export default function AdminModal(props) {
   }
 
   const handleOnSubmit = (e) => {
-    e.preventDefault();
-    dispatch(actManageUsers(state, method, userEdit?.user_id));
-    refresh();
+    const m = method.toLowerCase();
+    if (window.confirm(`Bạn có chắc ${m} người dùng này?`)) {
+      e.preventDefault();
+      dispatch(actManageUsers(state, method, userEdit?.user_id));
+      refresh();
+    }
   };
 
   const handleLoading = () => {
@@ -187,7 +190,7 @@ export default function AdminModal(props) {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{method} Người dùng</h5>
+            <h5 className="modal-title">{method} người dùng</h5>
             <button
               type="button"
               className="close"
@@ -294,7 +297,7 @@ export default function AdminModal(props) {
                   }}
                 >
                   <option value="Male">
-                    Name
+                    Nam
                   </option>
                   <option value="Female">Nữ</option>
                   <option value="Other">Khác</option>

@@ -1,6 +1,6 @@
 import React, { useEffect,  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { actFetchProductsData } from './modules/actions';
+import { actFetchProductsData} from './modules/actions';
 import './style.css';
 import VND from 'components/CurrencyFormat';
 export default function ShopArtPage() {
@@ -18,9 +18,10 @@ export default function ShopArtPage() {
   }, [data]);
 
   const handleRenderTable = () => {
-    return productsData?.map((product) => {
+    return productsData?.filter(product => product.status == 'Còn hàng')?.map((product) => {
       return (
         <div className="col-lg-4 col-md-4 col-sm-6 col-6 " key={product.product_id}>
+          <form>
             <div className="single_product">
               <div className="product_thumb">
                 <a href={`/detail/`+`${product.product_id}`}>
@@ -37,12 +38,13 @@ export default function ShopArtPage() {
                 </div>
               </div>
             </div>
+          </form>
         </div>  
       )
     })
   }
   return (
-    <div>
+    <div className='container cover'>
       <h3 className='text-center my-3 user-title'>Cửa hàng</h3>
       <div className="shop_section shop_reverse">
         <div className="container">
@@ -51,7 +53,6 @@ export default function ShopArtPage() {
               <aside className="sidebar_widget">
                 <div className="widget_inner">
                   <div className="widget_list widget_categories">
-                    <h2>Thể loại</h2>
                     <ul>
                       <li className="widget_sub_categories"><a href="/" data-toggle="collapse" data-target="#men">Phân loại</a>
                         <ul className="widget_dropdown_categories collapse show" id="men">

@@ -24,8 +24,8 @@ const userLoginReducer = (state = initialState, action) => {
     }
     case ActionType.LOGIN_FAILED: {
       state.user = null;
-      state.loading = false;
-      state.error = payload.response.data.message;
+      state.loading = true;
+      state.error = payload.response.message;
       return { ...state };
     }
     case ActionType.LOGIN_RESET: {
