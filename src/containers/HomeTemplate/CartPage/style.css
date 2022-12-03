@@ -11,11 +11,6 @@
   width: 300px;
 }
 
-@media only screen and (max-width: 575px) {
-  .section_title {
-    text-align: center;
-  }
-}
 .section_title h2 {
   font-size: 24px;
   line-height: 26px;
@@ -37,49 +32,37 @@
     line-height: 22px;
   }
 }
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .section_title.mb-130 {
+    margin-bottom: 60px;
+  }
+  .section_title.mb-60 {
+    margin-bottom: 40px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .section_title.mb-130 {
+    margin-bottom: 40px;
+  }
+  .section_title.mb-50 {
+    margin-bottom: 30px;
+  }
+  .section_title.mb-60 {
+    margin-bottom: 30px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .section_title h2 {
     font-size: 16px;
     line-height: 18px;
   }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .section_title.mb-60 {
-    margin-bottom: 40px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section_title.mb-60 {
-    margin-bottom: 30px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section_title.mb-60 {
-    margin-bottom: 30px;
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .section_title.mb-130 {
-    margin-bottom: 60px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section_title.mb-130 {
-    margin-bottom: 40px;
-  }
-}
-@media only screen and (max-width: 767px) {
   .section_title.mb-130 {
     margin-bottom: 30px;
   }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
   .section_title.mb-50 {
     margin-bottom: 30px;
   }
-}
-@media only screen and (max-width: 767px) {
-  .section_title.mb-50 {
+  .section_title.mb-60 {
     margin-bottom: 30px;
   }
 }
@@ -363,65 +346,6 @@
     line-height: 46px;
     margin-right: 27px;
   }
-  .shopping_cart_btn a:hover {
-    border-color: #6a7964 !important;
-  }
-  .shopping_cart_btn a::before {
-    background: #6a7964;
-  }
-  @media only screen and (max-width: 767px) {
-    .shopping_cart_btn a {
-      font-size: 13px;
-      padding: 0 15px;
-      margin-right: 15px;
-    }
-  }
-  @media only screen and (max-width: 575px) {
-    .shopping_cart_btn a {
-      margin-bottom: 15px;
-    }
-  }
-  .shopping_cart_btn button {
-    font-size: 14px;
-    background: #fff;
-    color: #000000;
-    padding: 0 37px;
-    height: 48px;
-    line-height: 46px;
-  }
-  .shopping_cart_btn button:hover {
-    border-color: #6a7964 !important;
-  }
-  .shopping_cart_btn button::before {
-    background: #6a7964;
-  }
-  @media only screen and (max-width: 767px) {
-    .shopping_cart_btn button {
-      font-size: 13px;
-      padding: 0 15px;
-    }
-  }
-  @media only screen and (max-width: 575px) {
-    .shopping_cart_btn button {
-      margin-bottom: 15px;
-    }
-  }
-  
-  .shopping_continue_btn button {
-    font-size: 14px;
-    padding: 0 45px;
-    height: 50px;
-    line-height: 48px;
-  }
-  @media only screen and (max-width: 767px) {
-    .shopping_continue_btn button {
-      font-size: 13px;
-      padding: 0 17px;
-      height: 47px;
-      line-height: 46px;
-    }
-  }
-  
   @media only screen and (max-width: 575px) {
     .shopping_coupon_calculate.top {
       margin-bottom: 25px;

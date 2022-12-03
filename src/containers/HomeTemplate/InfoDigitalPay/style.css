@@ -529,20 +529,9 @@
     cursor: pointer;
     padding-left: 32px;
   }
-  @media only screen and (max-width: 767px) {
-    .panel-default label {
-      font-size: 14px;
-    }
-  }
   .panel-default .card-body1 {
     padding-left: 30px;
     padding-top: 14px;
-  }
-  @media only screen and (max-width: 767px) {
-    .panel-default .card-body1 {
-      padding-left: 25px;
-      padding-top: 6px;
-    }
   }
   .panel-default .card-body1 p {
     font-size: 13px;
@@ -559,29 +548,5 @@
     line-height: 66px;
     text-transform: uppercase;
   }
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .place_order_btn a {
-      padding: 0 30px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .place_order_btn a {
-      height: 47px;
-      line-height: 47px;
-      font-size: 14px;
-    }
-  }
-  @media only screen and (max-width: 575px) {
-    .place_order_btn a {
-      padding: 0 20px;
-    }
-  }
-  
-  @media only screen and (max-width: 767px) {
-    .order_table_right {
-      margin-top: 42px;
-    }
-  }
-  
   /*checkout page css end*/
   

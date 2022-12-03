@@ -15,72 +15,10 @@
   display: inline-block;
   margin-bottom: 0;
 }
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .section_title h2 {
-    font-size: 20px;
-    line-height: 22px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section_title h2 {
-    font-size: 18px;
-    line-height: 22px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section_title h2 {
-    font-size: 16px;
-    line-height: 18px;
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .section_title.mb-60 {
-    margin-bottom: 40px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section_title.mb-60 {
-    margin-bottom: 30px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section_title.mb-60 {
-    margin-bottom: 30px;
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .section_title.mb-130 {
-    margin-bottom: 60px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section_title.mb-130 {
-    margin-bottom: 40px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section_title.mb-130 {
-    margin-bottom: 30px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section_title.mb-50 {
-    margin-bottom: 30px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section_title.mb-50 {
-    margin-bottom: 30px;
-  }
-}
+
 /* 14. checkout page css here */
 .user-actions {
     margin-bottom: 37px;
-  }
-  @media only screen and (max-width: 767px) {
-    .user-actions {
-      margin-bottom: 20px;
-    }
   }
   .user-actions h3 {
     font-size: 14px;
@@ -90,25 +28,6 @@
     padding: 15px 10px 15px 30px;
     margin-bottom: 0;
     color: #999999;
-  }
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .user-actions h3 {
-      font-size: 13px;
-      padding: 15px 10px 15px 20px;
-    }
-  }
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .user-actions h3 {
-      font-size: 13px;
-      padding: 12px 10px 12px 10px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .user-actions h3 {
-      font-size: 13px;
-      line-height: 24px;
-      padding: 8px 15px;
-    }
   }
   .user-actions h3 i {
     font-size: 17px;
@@ -275,13 +194,6 @@
       font-size: 20px;
       line-height: 25px;
       margin-bottom: 20px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .checkout_form h3 {
-      font-size: 18px;
-      line-height: 25px;
-      margin-bottom: 14px;
     }
   }
   .checkout_form p {
@@ -600,21 +512,6 @@
     cursor: pointer;
     padding-left: 32px;
   }
-  @media only screen and (max-width: 767px) {
-    .panel-default label {
-      font-size: 14px;
-    }
-  }
-  .panel-default .card-body1 {
-    padding-left: 30px;
-    padding-top: 14px;
-  }
-  @media only screen and (max-width: 767px) {
-    .panel-default .card-body1 {
-      padding-left: 25px;
-      padding-top: 6px;
-    }
-  }
   .panel-default .card-body1 p {
     font-size: 13px;
     line-height: 24px;
@@ -630,29 +527,5 @@
     line-height: 66px;
     text-transform: uppercase;
   }
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .place_order_btn a {
-      padding: 0 30px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .place_order_btn a {
-      height: 47px;
-      line-height: 47px;
-      font-size: 14px;
-    }
-  }
-  @media only screen and (max-width: 575px) {
-    .place_order_btn a {
-      padding: 0 20px;
-    }
-  }
-  
-  @media only screen and (max-width: 767px) {
-    .order_table_right {
-      margin-top: 42px;
-    }
-  }
-  
   /*checkout page css end*/
   

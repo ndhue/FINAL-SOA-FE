@@ -45,6 +45,7 @@ export default function SellerManagementPage() {
     )}
   }
 
+  console.log(usersData);
   const handleRenderTable = () => {
     return usersData?.map((user, index) => {
       return (
@@ -103,6 +104,14 @@ export default function SellerManagementPage() {
           <input className="form-control m-0 mx-2" type="search" placeholder="Tìm kiếm" aria-label="Search" ref={searchInput} />
           <button className="btn m-0 btn-search" type="submit">Tìm kiếm</button>
         </form>
+        <button className="btn btn-primary" onClick={()=>{
+          const searchingData = usersData.filter(user => {
+            if (user.status) {
+              return removeVietnameseTones(user.status.toLowerCase()).indexOf(removeVietnameseTones("Chờ duyệt").toLowerCase()) >= 0
+            }
+          });
+          return setUsersData(searchingData);
+        }}> Duyệt đơn</button>
       </div>
       <AdminModalSeller method={method} userEdit={userEdit} userStatus={userStatus}/>
 

@@ -26,7 +26,7 @@ const productDetailReducer = (state = initialState, action) => {
     case ActionTypes.PRODUCT_DETAIL_FAILED: {
       state.productData = null;
       state.loading = false;
-      state.error = payload.response.data.message;
+      state.error = payload.response.message;
       return { ...state };
     }
     case ActionTypes.CART_MANAGEMENT_REQUEST: {
@@ -44,7 +44,7 @@ const productDetailReducer = (state = initialState, action) => {
     case ActionTypes.CART_MANAGEMENT_FAILED: {
       state.product = null;
       state.loading = false;
-      state.error = payload.response.product.message;
+      state.error = payload.response.message;
       return { ...state };
     }
     default:

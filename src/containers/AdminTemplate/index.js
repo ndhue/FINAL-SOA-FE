@@ -6,9 +6,9 @@ import AdminSidebar from './_components/Sidebar';
 export default function AdminTemplate(props) {
   const { exact, path, component } = props;
 
-  // if (!localStorage.getItem("UserInfo") || JSON.parse(localStorage.getItem("UserInfo")).user.role != "ADMIN") {
-  //   return <Redirect to="/"></Redirect>
-  // };
+  if (!localStorage.getItem("UserInfo") || JSON.parse(localStorage.getItem("UserInfo")).role != "Admin") {
+    return <Redirect to="/"></Redirect>
+  };
   return (
     <div className='row m-0'>
       <div className='col-2 px-0'>

@@ -38,10 +38,10 @@ export default function CartPage(props) {
   const handleRenderTable = () => {
     return productsData?.map((product,index) => {
       return (
-        <tr className="border-top text-center" key={index+1}>
+        <tr className="border-top text-center" key={product.product_id}>
             <td>
                 <div className="cart_product_thumb">
-                {product.product_id}
+                {index+1}
                 </div>
             </td>
             <td>

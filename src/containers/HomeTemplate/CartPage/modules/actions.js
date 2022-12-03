@@ -71,6 +71,7 @@ export const actDeleteProductCart = (user_id, product_id) => {
     api.delete(`/carts/${user_id}/${product_id}`)
       .then(result => {
         dispatch(actDeleteProductSuccess());
+        localStorage.removeItem(`${product_id}+${user_id}`);
         alert("Deleted successfully! Refresh & change.")
       })
       .catch(error => {

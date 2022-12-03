@@ -2,7 +2,6 @@ import React, { useEffect,  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { actFetchUsersDataByID } from '../PersonInfoPage/modules/actions';
 import './style.css';
-import VND from 'components/CurrencyFormat';
 export default function DetailOrderPage() {
   const dispatch = useDispatch();
   const userId = localStorage.getItem("UserInfo") ? JSON.parse(localStorage.getItem("UserInfo")).user_id : 0;
@@ -21,18 +20,13 @@ export default function DetailOrderPage() {
   return (
     <div>
       <h3 className='text-center my-3 user-title'>Chi tiết đơn hàng</h3>
-      
-    
    <div className="checkout_section" id="accordion">
-    
   <div className="container">
-    
     <div className="checkout_form">
       <div className="row">
         <div className="col-lg-7 col-md-6">
           <form action="#">
             <h3>Thông tin thanh toán</h3>
-           
             <div className="checkout_form_input">
               <label>Họ và tên</label>
               <input type="text" value={userInfo.fullname} disabled/>
@@ -53,8 +47,6 @@ export default function DetailOrderPage() {
               <label> Trạng thái <span>*</span></label>
               <input type="text" />
             </div>
-
-            
           </form>
         </div>
        
@@ -88,10 +80,7 @@ export default function DetailOrderPage() {
                     </tr>
                   </tfoot>
                 </table>
-                
-             
               </div>
-            
             </form>
           </div>
         </div>

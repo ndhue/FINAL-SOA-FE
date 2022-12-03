@@ -6,13 +6,13 @@ import { actResetSignUpMessenger, actSignUp } from "./modules/actions";
 import '../../AdminTemplate/SignUpPage/style.css';
 import background1 from "./img/banner.jpg";
 import background2 from "./img/content.jpg";
-import './style.css';
 export default function SignUpSeller() {
+  const userId = localStorage.getItem("UserInfo") ? JSON.parse(localStorage.getItem("UserInfo")).user_id : 0;
   const formInput = useRef(null);
   const history = useHistory();
   const [info, setInfo] = useState({
     name_store: "",
-    user_id: 2,
+    user_id: userId,
   });
 
   const initialValid = {

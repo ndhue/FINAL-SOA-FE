@@ -1,6 +1,5 @@
 import * as ActionTypes from './constants';
 import api from 'utils/apiUtils';
-import { Redirect } from 'react-router-dom';
 
 const actFetchProductDetail = id => {
   return dispatch => {
@@ -37,15 +36,14 @@ export { actFetchProductDetail };
 
 export const actAddProductToCart = (product_id, user_id) =>{
   return (dispatch) => {
-    dispatch(actAddToCartRequest());  
+    dispatch(actAddToCartRequest());
       api.post("/carts/addproduct", {product_id, user_id})
         .then(result => {
+          localStorage.setItem(`${product_id}+${user_id}`, JSON.stringify(result.data));
           dispatch(actAddToCartSuccess(result.data));
         })
         .catch(error => {
           dispatch(actAddToCartFailed(error));
-          alert('Sản phẩm đã tồn tại');
-          window.location.reload();
         });
     }
 }

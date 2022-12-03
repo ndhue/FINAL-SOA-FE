@@ -6,7 +6,9 @@ export const actFetchUsersData = () => {
     dispatch(actManageUsersRequest());
     api.get("/sellerpendings")
       .then(result => {
-        dispatch(actManageUsersSuccess(result.data));
+        const uncheckedProduct = result.data.filter(p => p.status === "Chờ duyệt");
+        const checkedProduct = result.data.filter(p => p.status !== "Chờ duyệt");
+        dispatch(actManageUsersSuccess(uncheckedProduct.concat(checkedProduct)));
       })
       .catch(error => {
         dispatch(actManageUsersFailed(error));

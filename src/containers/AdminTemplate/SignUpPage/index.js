@@ -1,13 +1,14 @@
 import Loading from "components/Loading";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect} from "react-router-dom";
+import { Redirect, useHistory} from "react-router-dom";
 import { actResetSignUpMessenger, actSignUp } from "./modules/actions";
 import './style.css';
 import background1 from "./img/banner.jpg";
 import background2 from "./img/content.jpg";
 export default function SignUpPage() {
   const formInput = useRef(null);
+  const history = useHistory();
   const [info, setInfo] = useState({
     fullname: "",
     email: "",
@@ -52,7 +53,7 @@ export default function SignUpPage() {
     e.preventDefault();
     dispatch(actSignUp(info));
     formInput.current.reset();
-
+    history.goBack();
   };
 
   const dispatch = useDispatch();
